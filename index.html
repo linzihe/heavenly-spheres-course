@@ -561,6 +561,18 @@ body {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="4"/></svg>
     第三讲<span class="nav-check">✓</span>
   </button>
+  <button class="nav-pill" data-lesson="4">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="8" r="2"/><circle cx="16" cy="10" r="1.5"/><circle cx="10" cy="16" r="1.5"/></svg>
+    第四讲<span class="nav-check">✓</span>
+  </button>
+  <button class="nav-pill" data-lesson="5">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
+    第五讲<span class="nav-check">✓</span>
+  </button>
+  <button class="nav-pill" data-lesson="6">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 22,22 2,22"/><circle cx="12" cy="14" r="3"/></svg>
+    第六讲<span class="nav-check">✓</span>
+  </button>
 </nav>
 
 <!-- Progress -->
@@ -995,6 +1007,484 @@ body {
 
 </section>
 
+<!-- ======================================================================
+     LESSON 4: 行星
+     ====================================================================== -->
+<section class="lesson" id="lesson4">
+
+<div class="card reveal">
+  <div class="card-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="8" r="2"/><circle cx="16" cy="10" r="1.5"/><circle cx="10" cy="16" r="1.5"/></svg>
+  </div>
+  <button class="tts-btn" onclick="speakSection(this, 'section4_1')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>一、行星：占星学的基石</h2>
+  <div id="section4_1">
+  <p>行星是占星学的<strong>基础</strong>——正是通过它们的运动、表达和互动，占星解读才成为可能。对地球上的观测者而言，行星最初看起来像恒星一样的光点。然而，行星会随着时间<strong>改变位置</strong>，而恒星始终保持相对位置不变。事实上，"planet"一词源自希腊语 <em>πλανήτης</em>，意为<strong>"漫游者"</strong>。</p>
+  <div class="highlight">
+    由于行星相对于不变恒星（天球）的飘忽运动，它们代表了天空中<strong>可变的部分</strong>。因此，它们是测量和定性天体变化——以及对应的地上变化——的<strong>主要工具</strong>。
+  </div>
+
+  <!-- Planetary Symbols SVG -->
+  <svg class="svg-diagram" viewBox="0 0 620 160" xmlns="http://www.w3.org/2000/svg">
+    <defs><filter id="pshadow"><feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.08"/></filter></defs>
+    <text x="310" y="18" text-anchor="middle" font-family="var(--font-display)" font-size="13" fill="var(--navy)" font-weight="700">传统七大行星符号</text>
+    <rect x="10" y="32" width="80" height="70" rx="8" fill="#fff" stroke="#1a3a5c" stroke-width="1" filter="url(#pshadow)"/><text x="50" y="58" text-anchor="middle" font-size="26">☉</text><text x="50" y="88" text-anchor="middle" font-size="10" fill="var(--text-muted)">太阳 Sun</text>
+    <rect x="95" y="32" width="80" height="70" rx="8" fill="#fff" stroke="#1a3a5c" stroke-width="1" filter="url(#pshadow)"/><text x="135" y="58" text-anchor="middle" font-size="26">☽</text><text x="135" y="88" text-anchor="middle" font-size="10" fill="var(--text-muted)">月亮 Moon</text>
+    <rect x="180" y="32" width="80" height="70" rx="8" fill="#fff" stroke="#1a3a5c" stroke-width="1" filter="url(#pshadow)"/><text x="220" y="58" text-anchor="middle" font-size="26">♄</text><text x="220" y="88" text-anchor="middle" font-size="10" fill="var(--text-muted)">土星 Saturn</text>
+    <rect x="265" y="32" width="80" height="70" rx="8" fill="#fff" stroke="#1a3a5c" stroke-width="1" filter="url(#pshadow)"/><text x="305" y="58" text-anchor="middle" font-size="26">♃</text><text x="305" y="88" text-anchor="middle" font-size="10" fill="var(--text-muted)">木星 Jupiter</text>
+    <rect x="350" y="32" width="80" height="70" rx="8" fill="#fff" stroke="#1a3a5c" stroke-width="1" filter="url(#pshadow)"/><text x="390" y="58" text-anchor="middle" font-size="26">♂</text><text x="390" y="88" text-anchor="middle" font-size="10" fill="var(--text-muted)">火星 Mars</text>
+    <rect x="435" y="32" width="80" height="70" rx="8" fill="#fff" stroke="#1a3a5c" stroke-width="1" filter="url(#pshadow)"/><text x="475" y="58" text-anchor="middle" font-size="26">♀</text><text x="475" y="88" text-anchor="middle" font-size="10" fill="var(--text-muted)">金星 Venus</text>
+    <rect x="520" y="32" width="80" height="70" rx="8" fill="#fff" stroke="#1a3a5c" stroke-width="1" filter="url(#pshadow)"/><text x="560" y="58" text-anchor="middle" font-size="26">☿</text><text x="560" y="88" text-anchor="middle" font-size="10" fill="var(--text-muted)">水星 Mercury</text>
+  </svg>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section4_2')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>二、行星等级：迦勒底秩序</h2>
+  <div id="section4_2">
+  <p>理解每颗行星的本质和功能，需要研究它在<strong>天球序列中的位置</strong>。行星的分布顺序被称为<strong>迦勒底秩序</strong>（Chaldean Order），它按照<strong>视运动速度</strong>从最远到最近排列：<strong>土星 → 木星 → 火星 → 太阳 → 金星 → 水星 → 月亮</strong>。</p>
+
+  <div class="highlight">
+    <strong>发光体 vs 行星：</strong>首先需要区分<strong>发光体</strong>和<strong>行星</strong>。发光体是太阳和月亮——因其光芒被视为天空的<strong>国王和王后</strong>。太阳位于天球序列的<strong>正中心</strong>，月亮是他的伴侣。其余五颗行星构成王室随从。这一区分在占星体系中具有<strong>根本重要性</strong>。
+  </div>
+
+  <p><strong>外行星与内行星：</strong>太阳作为序列中心也影响了行星的分组。太阳球层之上的火星、木星和土星称为<strong>外行星</strong>（Superior）——运动较慢，影响更持久。太阳之下的金星、水星和月亮称为<strong>内行星</strong>（Inferior）——运动较快，影响更短暂但更动态。此分类与<strong>好坏品质无关</strong>，仅涉及其相对于太阳球层的位置。</p>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section4_3')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>三、行星的自然本质</h2>
+  <div id="section4_3">
+  <p>每颗行星的本质派生于多种可直接观测的<strong>天文特征</strong>：运动、外观、亮度以及最重要的是——在天球序列中的位置。</p>
+
+  <p><strong>行星的气质（第一性质）：</strong>行星各由两种第一性质表征其本质。太阳因热和辐射而<strong>热+干</strong>（但温和适度）；月亮因与液体振荡的关联而<strong>冷+湿</strong>；土星（最远可见行星）<strong>过度的冷+干</strong>；火星<strong>过度的热+干</strong>；木星（介于土星之冷与火星之热之间）<strong>温和的热+湿</strong>；金星同样温和<strong>热+湿</strong>；水星性质<strong>暧昧不定</strong>——既干（近太阳）又湿（近月亮），随境而变。</p>
+
+  <!-- SVG: Benefic/Malefic -->
+  <svg class="svg-diagram" viewBox="0 0 620 180" xmlns="http://www.w3.org/2000/svg">
+    <text x="310" y="16" text-anchor="middle" font-family="var(--font-display)" font-size="12" fill="var(--navy)" font-weight="700">吉星与凶星 · 阴阳 · 昼夜派系</text>
+    <rect x="8" y="28" width="195" height="140" rx="8" fill="#f0faf5" stroke="#2d6a4f" stroke-width="1"/>
+    <text x="105" y="52" text-anchor="middle" font-size="12" fill="#2d6a4f" font-weight="700">吉星 Benefic</text>
+    <text x="105" y="74" text-anchor="middle" font-size="10" fill="var(--text-body)">♃ 木星 · 大吉星 Greater</text>
+    <text x="105" y="92" text-anchor="middle" font-size="10" fill="var(--text-body)">♀ 金星 · 小吉星 Lesser</text>
+    <text x="105" y="114" text-anchor="middle" font-size="10" fill="var(--text-body)">⊙ 太阳 · 通常为吉</text>
+    <text x="105" y="138" text-anchor="middle" font-size="9" fill="var(--text-muted)">热+湿 → 有利生命与生长</text>
+    <rect x="210" y="28" width="195" height="140" rx="8" fill="#fef5f0" stroke="#c0392b" stroke-width="1"/>
+    <text x="307" y="52" text-anchor="middle" font-size="12" fill="#c0392b" font-weight="700">凶星 Malefic</text>
+    <text x="307" y="74" text-anchor="middle" font-size="10" fill="var(--text-body)">♄ 土星 · 大凶星 Greater</text>
+    <text x="307" y="92" text-anchor="middle" font-size="10" fill="var(--text-body)">♂ 火星 · 小凶星 Lesser</text>
+    <text x="307" y="118" text-anchor="middle" font-size="10" fill="var(--text-body)">☿ 水星 · 随所遇而变</text>
+    <text x="307" y="138" text-anchor="middle" font-size="9" fill="var(--text-muted)">过度的冷/热+干 → 不利生命</text>
+    <rect x="412" y="28" width="195" height="140" rx="8" fill="#f5f5ff" stroke="#6c5ce7" stroke-width="1"/>
+    <text x="510" y="52" text-anchor="middle" font-size="12" fill="#6c5ce7" font-weight="700">昼夜派系 Sect</text>
+    <text x="510" y="76" text-anchor="middle" font-size="10" fill="var(--text-body)">昼：⊙ ♃ ♄ · 外向主动</text>
+    <text x="510" y="98" text-anchor="middle" font-size="10" fill="var(--text-body)">夜：☽ ♀ ♂ · 内向反思</text>
+    <text x="510" y="124" text-anchor="middle" font-size="10" fill="var(--text-body)">♀阳：⊙♃♂♄ · ♀阴：☽♀</text>
+    <text x="510" y="148" text-anchor="middle" font-size="9" fill="var(--text-muted)">♀中性：☿（视境况而变）</text>
+  </svg>
+
+  <div class="highlight">
+    <strong>"吉"与"凶"的真相：</strong>这是现代占星学中最被误解的概念。这些术语来自<strong>农业语境</strong>而非道德判断。热+湿有利生命与生长（肥沃），故为"吉"；过度的冷+干或热+干对抗生命（荒芜），故为"凶"。土星象征<strong>霜冻</strong>，火星象征<strong>干旱</strong>。关键在于：吉凶取决于<strong>上下文</strong>——如果摧毁疾病是好事，凶星就变得有利。所有过度都是破坏性的，因此也是凶的。
+  </div>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section4_4')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>四、七大行星详解</h2>
+  <div id="section4_4">
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin:14px 0;">
+
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff; border-top:3px solid #3a3a3a;">
+      <h4 style="color:#1a1a1a;">♄ 土星 Saturn</h4>
+      <p style="font-size:0.85rem;color:var(--text-muted);">昼 · 阳 · 冷+干 · 土元素 · 忧郁质 · 大凶星</p>
+      <p style="font-size:0.89rem;">最远最慢的行星。象征<strong>寒冷、严峻、坚硬、孤独、距离、限制</strong>，但也代表<strong>责任、严肃、深度思考、记忆、反思、策略</strong>。代表时间、成熟、老年、终结。尊贵时：深沉、严谨、节俭、耐心。陷落时：吝啬、恐惧、嫉妒、固执、猜疑。</p>
+    </div>
+
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff; border-top:3px solid #4a6fa5;">
+      <h4 style="color:#2c5282;">♃ 木星 Jupiter</h4>
+      <p style="font-size:0.85rem;color:var(--text-muted);">昼 · 阳 · 热+湿 · 气元素 · 多血质 · 大吉星</p>
+      <p style="font-size:0.89rem;">天空第二亮行星。象征<strong>和谐、福祉、仁慈、节制、正义、宗教、法律、宏大</strong>。作为冷热之间的调停者，代表平衡与成长。尊贵时：谦逊、清醒、公正、忠诚、慷慨。陷落时：奢侈、固执、欺诈、伪善、自负。</p>
+    </div>
+
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff; border-top:3px solid #c0392b;">
+      <h4 style="color:#a93226;">♂ 火星 Mars</h4>
+      <p style="font-size:0.85rem;color:var(--text-muted);">夜 · 阳 · 过度热+干 · 火元素 · 胆汁质 · 小凶星</p>
+      <p style="font-size:0.89rem;">外行星中最快，呈红橙色。象征<strong>行动、勇气、战斗、挑战、竞争</strong>。代表暴力、冲突、侵略与毁灭。尊贵时：勇敢、自信、镇定、好战尚武。陷落时：吹嘘、欺凌、对抗、无礼、暴戾、贪婪。</p>
+    </div>
+
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff; border-top:3px solid #d4a83a;">
+      <h4 style="color:#9a7d0a;">⊙ 太阳 Sun</h4>
+      <p style="font-size:0.85rem;color:var(--text-muted);">昼 · 阳 · 温和热+干 · 火元素 · 发光体之王</p>
+      <p style="font-size:0.89rem;">最大发光体。象征<strong>光芒、热、生命、创造力、神圣、视觉、真理</strong>。代表尊严、权威、父权。但若太近则过度：光使人盲，热使人灼。尊贵时：忠诚、守信、善治、审慎、威严。陷落时：傲慢、骄傲、轻蔑、不安、支配。</p>
+    </div>
+
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff; border-top:3px solid #5a9e3a;">
+      <h4 style="color:#1e7e34;">♀ 金星 Venus</h4>
+      <p style="font-size:0.85rem;color:var(--text-muted);">夜 · 阴 · 温和热+湿 · 气+水 · 多血+黏液质 · 小吉星</p>
+      <p style="font-size:0.89rem;">最亮行星。象征<strong>美、优雅、柔软、精致、爱、友谊、和谐、感性</strong>。也代表游戏、娱乐与各种享乐。尊贵时：平和、宁静、真诚、愉悦、艺术。陷落时：懒惰、奢侈、放荡、贪欲、嫉妒、不忠。</p>
+    </div>
+
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff; border-top:3px solid #6c5ce7;">
+      <h4 style="color:#5541c8;">☿ 水星 Mercury</h4>
+      <p style="font-size:0.85rem;color:var(--text-muted);">中性 · 可变 · 暧昧 · 随所遇而变</p>
+      <p style="font-size:0.89rem;">最快行星，永远近太阳。象征<strong>沟通、交流、运输、贸易、语言、书写、教育、智力</strong>。性质中性——近吉则吉，近凶则凶。尊贵时：敏锐、雄辩、博学、好奇。陷落时：狂乱、争辩、谎言、欺诈、嘲弄。</p>
+    </div>
+
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff; border-top:3px solid #3a8fd4;">
+      <h4 style="color:#2471a3;">☽ 月亮 Moon</h4>
+      <p style="font-size:0.85rem;color:var(--text-muted);">夜 · 阴 · 冷+湿 · 水元素 · 黏液质 · 发光体之后</p>
+      <p style="font-size:0.89rem;">最接近地球的天体。象征<strong>有机生命、生物形态、生-长-衰循环、变化、波动</strong>。月亮代表所有女性形象——母亲、妻子、女王——以及公众与大众。尊贵时：善良、爱自由、适应力强。陷落时：漂泊者、懒惰、酗酒、惯性。</p>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section4_5')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>五、行星主宰与关联</h2>
+  <div id="section4_5">
+  <p>除其本质外，行星还与日常生活的方方面面有关联——颜色、气味、地点、矿物、外貌、职业。这些关联植根于行星的<strong>自然本质</strong>及其<strong>可见特征</strong>（如火星的红色）。</p>
+
+  <div style="overflow-x:auto;margin:12px 0;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+      <thead><tr style="color:var(--navy);border-bottom:2px solid var(--border);">
+        <th style="padding:8px;text-align:left;">行星</th><th style="padding:8px;text-align:left;">颜色</th><th style="padding:8px;text-align:left;">金属/矿物</th><th style="padding:8px;text-align:left;">地点</th><th style="padding:8px;text-align:left;">职业方向</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;font-weight:700;">♄ 土星</td><td style="padding:8px;">黑、深绿、铅灰</td><td style="padding:8px;">铅、蓝宝石、黑石</td><td style="padding:8px;">沙漠、洞穴、墓地、矿井</td><td style="padding:8px;">农夫、矿工、建筑、殡葬</td></tr>
+        <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;font-weight:700;">♃ 木星</td><td style="padding:8px;">亮色、蓝紫、红褐</td><td style="padding:8px;">锡、紫晶、翡翠、大理石</td><td style="padding:8px;">教堂、法院、整洁之地</td><td style="padding:8px;">法官、律师、神职、学者</td></tr>
+        <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;font-weight:700;">♂ 火星</td><td style="padding:8px;">红、黄、火色</td><td style="padding:8px;">铁、赤铁矿、硫磺</td><td style="padding:8px;">铁匠铺、熔炉、屠宰场</td><td style="padding:8px;">军人、外科医生、铁匠、厨师</td></tr>
+        <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;font-weight:700;">⊙ 太阳</td><td style="padding:8px;">金黄、橙、猩红</td><td style="padding:8px;">金、钻石、红宝石</td><td style="padding:8px;">皇宫、剧院、宏伟厅堂</td><td style="padding:8px;">国王、贵族、行政长官</td></tr>
+        <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;font-weight:700;">♀ 金星</td><td style="padding:8px;">纯白、粉彩、亮调</td><td style="padding:8px;">铜、珊瑚、青金石</td><td style="padding:8px;">花园、喷泉、婚房、舞厅</td><td style="padding:8px;">音乐家、画家、珠宝师、歌手</td></tr>
+        <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;font-weight:700;">☿ 水星</td><td style="padding:8px;">混合色、蓝灰、金属调</td><td style="padding:8px;">水银、黄玉、燧石</td><td style="padding:8px;">商店、市场、学校、图书馆</td><td style="padding:8px;">作家、教师、商人、信使</td></tr>
+        <tr><td style="padding:8px;font-weight:700;">☽ 月亮</td><td style="padding:8px;">浅蓝、白、银、淡绿</td><td style="padding:8px;">银、月长石、水晶</td><td style="padding:8px;">泉、码头、河湖、浴室</td><td style="padding:8px;">水手、渔夫、护士、接生婆</td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+
+<!-- Quiz 4 -->
+<div class="quiz-card reveal" id="quiz4">
+  <h3>第四讲 · 知识检测 <span style="font-size:0.8rem;color:var(--text-muted);">(每题 25 XP)</span></h3>
+  <p style="color:var(--text-muted);margin-bottom:14px;">完成以下4题检验学习成果</p>
+  <div id="quiz4Content"></div>
+</div>
+
+</section>
+
+<!-- ======================================================================
+     LESSON 5: 黄道与星座
+     ====================================================================== -->
+<section class="lesson" id="lesson5">
+
+<div class="card reveal">
+  <div class="card-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
+  </div>
+  <button class="tts-btn" onclick="speakSection(this, 'section5_1')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>一、黄道：生命的环带</h2>
+  <div id="section5_1">
+  <p>"Zodiac"一词源自希腊语 <em>Zoon</em>（生命/动物），黄道即是<strong>"生命之带"</strong>或"动物之带"——因为沿此环带的许多星座图像描绘的是动物形象（公羊、公牛、狮子等）。</p>
+  <p>黄道由太阳围绕地球的<strong>视运动</strong>生成。这条视运动轨迹称为<strong>黄道（Ecliptic）</strong>，正是月亮和行星在空间中移动的路径。由于行星的视轨迹并不完全与黄道重合，因此定义了一条约<strong>16°宽</strong>的环带（黄道上下各8°），以涵盖所有可见行星的运动区域。这个环带就是<strong>黄道</strong>——占星学最核心的参考框架。</p>
+  <div class="highlight">
+    黄道及其划分——<strong>星座</strong>——是占星学中测量行星运动以及它们在穿越不同星座时性质与效应变化的<strong>主要参考系统</strong>。
+  </div>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section5_2')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>二、四季与星座的划分</h2>
+  <div id="section5_2">
+  <p>太阳全年运动所引起的光与热变化产生了<strong>四季</strong>——春、夏、秋、冬。黄道最初就是作为<strong>日历工具</strong>来"测量"季节的。它将黄道分为四个区域，每个区域对应一个季节，其分界点位于<strong>春分、夏至、秋分、冬至</strong>。</p>
+
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin:14px 0;">
+    <div style="padding:16px; border-radius:var(--radius-md); border-left:4px solid #d4a83a; background:#fff;">
+      <h4>春 · 热+湿 · 气/多血</h4><p style="font-size:0.87rem;">春分点（黄道0°）· 昼夜等长。日渐长、夜渐短。积累的冬湿加上热量=<strong>肥沃与生长</strong>。其符号：发芽的种子。♈♉♊</p>
+    </div>
+    <div style="padding:16px; border-radius:var(--radius-md); border-left:4px solid #d45d3a; background:#fff;">
+      <h4>夏 · 热+干 · 火/胆汁</h4><p style="font-size:0.87rem;">夏至 · 日照最长。太阳达最高点。热逐渐干燥春湿=果实<strong>成熟</strong>。其符号：发芽的种子。♋♌♍</p>
+    </div>
+    <div style="padding:16px; border-radius:var(--radius-md); border-left:4px solid #5a9e3a; background:#fff;">
+      <h4>秋 · 冷+干 · 土/忧郁</h4><p style="font-size:0.87rem;">秋分 · 昼夜再等长。日照减少、天气转凉。收获的季节，<strong>为寒冬准备</strong>。其符号：开始干枯的植物。♎♏♐</p>
+    </div>
+    <div style="padding:16px; border-radius:var(--radius-md); border-left:4px solid #3a8fd4; background:#fff;">
+      <h4>冬 · 冷+湿 · 水/黏液</h4><p style="font-size:0.87rem;">冬至 · 最短白昼。太阳最低点。雨水充沛，自然<strong>相对静止</strong>，等待春天。其符号：贮存的食粮。♑♒♓</p>
+    </div>
+  </div>
+  <p>每个季节再分为<strong>开始、中间、结束</strong>三个阶段。四季节×3阶段=<strong>12个星座</strong>。春季前三：白羊（开始）→金牛（鼎盛）→双子（终结）。此序列在其余季节重复——夏：巨蟹·狮子·处女；秋：天秤·天蝎·射手；冬：摩羯·水瓶·双鱼。</p>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section5_3')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>三、星座的模式、元素与守护</h2>
+  <div id="section5_3">
+  <p>每个星座代表一组特定品质，由其所属季节和其在黄道序列中的位置决定。星座可按<strong>三种方式</strong>分类：</p>
+
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:14px; margin:14px 0;">
+    <div style="padding:16px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">模式 Mode</h4>
+      <p style="font-size:0.88rem;"><strong>启动/本位</strong>（白羊巨蟹天秤摩羯）：季节之初，强烈行动驱动，快速但短暂。</p>
+      <p style="font-size:0.88rem;"><strong>固定</strong>（金牛狮子天蝎水瓶）：季节之中，稳定持久，保守、坚持但有惯性。</p>
+      <p style="font-size:0.88rem;"><strong>变动/双体</strong>（双子处女射手双鱼）：季节之末，过渡阶段，摇摆于冲动与惯性之间，多面、适应。</p>
+    </div>
+    <div style="padding:16px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">元素/气质</h4>
+      <p style="font-size:0.88rem;">火（白羊·狮子·射手）→ 胆汁质 · 阳性 · 昼<br>土（金牛·处女·摩羯）→ 忧郁质 · 阴性 · 夜<br>气（双子·天秤·水瓶）→ 多血质 · 阳性 · 昼<br>水（巨蟹·天蝎·双鱼）→ 黏液质 · 阴性 · 夜</p>
+      <p style="font-size:0.85rem;color:var(--text-muted);">三元组（Triplicity）：每个元素三个星座</p>
+    </div>
+    <div style="padding:16px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">行星守护</h4>
+      <table style="width:100%;font-size:0.82rem;border-collapse:collapse;">
+        <tr><td>♈ 白羊 ♏ 天蝎</td><td style="color:#c0392b;">♂ 火星</td></tr>
+        <tr><td>♉ 金牛 ♎ 天秤</td><td style="color:#1e7e34;">♀ 金星</td></tr>
+        <tr><td>♊ 双子 ♍ 处女</td><td style="color:#6c5ce7;">☿ 水星</td></tr>
+        <tr><td>♋ 巨蟹</td><td style="color:#2471a3;">☽ 月亮</td></tr>
+        <tr><td>♌ 狮子</td><td style="color:#9a7d0a;">⊙ 太阳</td></tr>
+        <tr><td>♐ 射手 ♓ 双鱼</td><td style="color:#2c5282;">♃ 木星</td></tr>
+        <tr><td>♑ 摩羯 ♒ 水瓶</td><td style="color:#1a1a1a;">♄ 土星</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <p>火星守护的白羊和天蝎都表现出征服和侵略的<strong>火星特质</strong>，但白羊（阳·火·启动）更外向，天蝎（阴·水·固定）更防御。守护星如同星座的<strong>"万能钥匙"</strong>，深刻参与了星座的特性塑造。模式+元素+守护星=星座的完整本质。</p>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section5_4')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>四、十二星座本质一览</h2>
+  <div id="section5_4">
+  <div class="flash-grid">
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♈ 白羊 Aries</div><div class="flash-back">阳·昼·火·启动·♂ 冲动快速，热烈大胆。核心=行动与征服。可能过于急躁和富侵略性。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♉ 金牛 Taurus</div><div class="flash-back">阴·夜·土·固定·♀ 保守稳定，顽强持久。核心=安全与舒适。可能固执、惰性。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♊ 双子 Gemini</div><div class="flash-back">阳·昼·气·变动·☿ 多变迅捷，好奇灵活。核心=沟通与连接。可能分散、不稳定。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♋ 巨蟹 Cancer</div><div class="flash-back">阴·夜·水·启动·☽ 动态但不外显，情绪化。核心=情感安全。可能防御、犹豫。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♌ 狮子 Leo</div><div class="flash-back">阳·昼·火·固定·⊙ 恒常坚实，积极进取。核心=自我表达与光芒。可能专横、自负。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♍ 处女 Virgo</div><div class="flash-back">阴·夜·土·变动·☿ 具体务实又多元高效。核心=分析与完善。可能过度挑剔。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♎ 天秤 Libra</div><div class="flash-back">阳·昼·气·启动·♀ 流畅动态，柔和优美。核心=平衡与和谐。可能优柔寡断。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♏ 天蝎 Scorpio</div><div class="flash-back">阴·夜·水·固定·♂ 情感深邃，防御坚持。核心=深度与转化。情感占据中心位置。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♐ 射手 Sagittarius</div><div class="flash-back">阳·昼·火·变动·♃ 多面积极，追求多元目标。核心=探索与意义。♃带来节制与正义感。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♑ 摩羯 Capricorn</div><div class="flash-back">阴·夜·土·启动·♄ 行动结合建设，本质务实。核心=结构与成就。♄赋予审慎与坚持。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♒ 水瓶 Aquarius</div><div class="flash-back">阳·昼·气·固定·♄ 恒常+流动性=疏离个人主义。核心=创新与抽象。高度独立的思维。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">♓ 双鱼 Pisces</div><div class="flash-back">阴·夜·水·变动·♃ 敏感多变，多重情感表达。♃带入理想主义与节制。核心=融合与超越。</div></div></div>
+  </div>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section5_5')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>五、行星入星座的解读方法</h2>
+  <div id="section5_5">
+  <p>解读行星在星座中的效应，必须将<strong>行星的本质</strong>与<strong>所在星座的特性</strong>相结合。行星指明<strong>什么在运作</strong>（如火星=行动、战斗）；星座指明<strong>以何种方式</strong>表达（如金牛=沉稳缓慢，巨蟹=情绪多变）。</p>
+  <div class="highlight">
+    <strong>范例：月亮在狮子座</strong>——月亮代表情绪、情感基调与感受力。在狮子座（火·热+干·固定·阳·昼·⊙守护），这些情绪将呈现：<br>
+    · 热情积极（火/胆汁质），不会被忽视（阳/昼）<br>
+    · 表达坚定，可能时常固执（固定）<br>
+    · 更外向快乐，但感受力减弱——因为热+干的狮子座与月亮冷+湿的本质相矛盾<br>
+    · 狮子是<strong>凶猛星座</strong>→情感表达更强烈、更具支配性<br>
+    · 若在<strong>白羊</strong>（同为火但启动）→更大的不安与行动倾向<br>
+    · 若在<strong>射手</strong>（同为火但变动）→更多面、更分散<br>
+    · 对比<strong>摩羯月亮</strong>→谨慎务实（土+忧郁+阴性），被♄制约→含蓄且略带猜疑
+  </div>
+  <p>重点：<strong>理解原则比记忆更重要</strong>。星座是"棋盘上的格子"——只有上面有棋子（行星）时才具有解读意义。星座为行星的表达<strong>着色</strong>，但行星的<strong>功能与重要性</strong>由宫位与整体星盘规则决定。</p>
+  </div>
+</div>
+
+<!-- Quiz 5 -->
+<div class="quiz-card reveal" id="quiz5">
+  <h3>第五讲 · 知识检测 <span style="font-size:0.8rem;color:var(--text-muted);">(每题 25 XP)</span></h3>
+  <p style="color:var(--text-muted);margin-bottom:14px;">完成以下4题检验学习成果</p>
+  <div id="quiz5Content"></div>
+</div>
+
+</section>
+
+<!-- ======================================================================
+     LESSON 6: 必然尊贵
+     ====================================================================== -->
+<section class="lesson" id="lesson6">
+
+<div class="card reveal">
+  <div class="card-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="12,2 22,22 2,22"/><circle cx="12" cy="14" r="3"/></svg>
+  </div>
+  <button class="tts-btn" onclick="speakSection(this, 'section6_1')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>一、必然尊贵与必然陷落体系</h2>
+  <div id="section6_1">
+  <p>我们已经看到行星如何表达其本质，以及星座的特征如何为这种表达"着色"。现在进一步深化这个概念。<strong>同一个星座中的不同行星</strong>，其表达的<strong>自如程度</strong>是不同的——有些行星在某个星座中天然就强大稳健，而在另一些星座中则遭遇困难。这些"舒适区"由<strong>黄道与天球的自然秩序</strong>定义。</p>
+
+  <div class="highlight">
+    当一个行星处于其本质<strong>被加强</strong>的黄道区域时，称为<strong>尊贵</strong>（Dignified）；处于其表达<strong>受挑战</strong>的区域时，称为<strong>陷落</strong>（Debilitated）。这些状态被称为<strong>"必然的"</strong>（Essential），因为它们直接影响行星<strong>本质</strong>的表达能力。尊贵的行星在星盘中获得更大力量，成为自身行动的<strong>主人</strong>；陷落的行星失去力量，受到其他行星的<strong>制约</strong>。
+  </div>
+
+  <p>在必然尊贵系统中，共有<strong>五种尊贵状态</strong>和<strong>两种陷落状态</strong>。主要尊贵（"完整的"）：<strong>庙（Rulership/Domicile）和旺（Exaltation）</strong>，及其对立面：<strong>陷（Detriment）和弱（Fall）</strong>。次要尊贵（"不完整的"）：<strong>三分主星（Triplicity）、界（Term）、面（Face）</strong>——它们没有对应的陷落状态。</p>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section6_2')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>二、主要尊贵：庙与旺</h2>
+  <div id="section6_2">
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin:14px 0;">
+    <div style="padding:18px; border-radius:var(--radius-md); border:2px solid #2d6a4f; background:#f8fdf9;">
+      <h4 style="color:#2d6a4f;">庙/入庙 Domicile (Rulership) +5</h4>
+      <p style="font-size:0.88rem;">最重要的尊贵级别。每个星座有一颗<strong>守护星</strong>，如同国王统治其领土。当守护星处于自己所守护的星座中时，它以<strong>最稳定、最富有成效</strong>的方式表达最佳本质。例如：金星在金牛或天秤→温和愉悦。</p>
+      <p style="font-size:0.83rem;color:var(--text-muted);">守护分配基于<strong>季节特征</strong>与<strong>迦勒底秩序</strong>：巨蟹/狮子=月亮/太阳（最长白昼的夏季中心）；摩羯/水瓶=土星（冬季，与发光体相反的贫瘠象征）；其余按迦勒底秩序（♃→♐♓，♂→♈♏，♀→♉♎，☿→♊♍）</p>
+    </div>
+    <div style="padding:18px; border-radius:var(--radius-md); border:2px solid #c0392b; background:#fffaf8;">
+      <h4 style="color:#c0392b;">陷/落陷 Detriment (Exile) -5</h4>
+      <p style="font-size:0.88rem;">当行星位于其守护星座<strong>正对面的星座</strong>时即"落陷"。表达变得<strong>不安、间接</strong>。本质被削弱和扭曲——土星的谨慎变成忧郁和吝啬；木星的乐观变成挥霍和无视；太阳的权威变成傲慢。</p>
+    </div>
+    <div style="padding:18px; border-radius:var(--radius-md); border:2px solid #9b7530; background:#fffdf5;">
+      <h4 style="color:#9b7530;">旺/擢升 Exaltation +4</h4>
+      <p style="font-size:0.88rem;">如同"首相"——高官厚禄、权势赫赫，但仍依赖国王的认可。旺星表达其本质的强度<strong>甚至可能超过入庙状态</strong>，但更<strong>不稳定</strong>，有高低起伏。每颗行星仅在一个星座中擢升。</p>
+      <p style="font-size:0.83rem;color:var(--text-muted);">⊙在♈（春日回归）、☽在♉（王后伴王）、♄在♎（与⊙旺相对，秋之始）、♃在♋（丰饶夏季）、♂在♑（酷热被冬冷中和）、♀在♓（春前湿润）、☿在♍（其守护的冷干星座）</p>
+    </div>
+    <div style="padding:18px; border-radius:var(--radius-md); border:2px solid #8b6914; background:#fffdf5;">
+      <h4 style="color:#8b6914;">弱/落 Fall -4</h4>
+      <p style="font-size:0.88rem;">旺的对面星座即为"弱"。与陷类似但特征不同：表达困难表现为<strong>不稳定</strong>。行星变得"笨拙"，行为<strong>不得体、不合适</strong>。一些作者称之为"抑郁"或"羞耻"。</p>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section6_3')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>三、次要尊贵：三分主星·界·面</h2>
+  <div id="section6_3">
+  <p>除了庙与旺，还有三个额外尊贵层级，它们没有对应的陷落状态（因此称"不完整的"）。它们允许对<strong>黄道每个度数</strong>中各行星的潜在表达进行更精细的评估。</p>
+
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:14px; margin:14px 0;">
+    <div style="padding:16px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">三分主星 Triplicity +3</h4>
+      <p style="font-size:0.88rem;">按星座<strong>元素</strong>分配。每个元素有三颗行星——<strong>昼、夜、参与</strong>。行星在其本元素的三星座中处于"家人之中"。如同王室成员——不在王座上，也不为首相，但在<strong>朋友之中</strong>。</p>
+      <p style="font-size:0.82rem;color:var(--text-muted);">火：⊙(昼) ♃(夜) ♄(参) | 土：♀(昼) ☽(夜) ♂(参) | 气：♄(昼) ☿(夜) ♃(参) | 水：♀(昼) ♂(夜) ☽(参)</p>
+    </div>
+    <div style="padding:16px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">界 Terms +2</h4>
+      <p style="font-size:0.88rem;">每个星座分为<strong>五个不等的度数区间</strong>，每个区间由一颗行星守护（仅♂♀☿♃♄，无⊙☽）。最特别之处在于不规则性——<strong>没有两个星座的界划分是相同的</strong>。埃及界是最常用的版本。</p>
+      <p style="font-size:0.82rem;color:var(--text-muted);">白羊：♃6°→♀6°→☿8°→♂5°→♄5° | 凶星倾向统治最后两个界，吉星统治初始的界。</p>
+    </div>
+    <div style="padding:16px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">面 Faces +1</h4>
+      <p style="font-size:0.88rem;">每个星座的30°分为<strong>三个相等的10°区间</strong>（称为Decans/面），按<strong>迦勒底秩序</strong>分配：♂⊙♀☿☽♄♃… 从白羊第一面=♂开始，依次推进。这是<strong>最弱的尊贵</strong>——行星在面中拥有<strong>有限的权力</strong>。</p>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section6_4')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>四、定位星 Dispositor</h2>
+  <div id="section6_4">
+  <p>星座的守护星如同<strong>国王</strong>——它对王国内的一切拥有<strong>管辖权</strong>，不仅包括位于该星座的行星，还包括宫头、阿拉伯点等。这颗守护星被称为<strong>定位星</strong>（Dispositor），即它"安排"（disposits）那些位于其星座中的星体。</p>
+
+  <div class="highlight">
+    <strong>范例：金星在摩羯座</strong>——金星（天然愉悦社交）在摩羯（♄守护）→ 表达变得更<strong>含蓄</strong>，因为它的定位星是<strong>土星</strong>。
+    ·若♄强大（如在水瓶=入庙）→ 赋予金星的含蓄表现为<strong>节制优雅</strong>。
+    ·若♄弱（如在巨蟹=落陷）→ 含蓄表现为<strong>防御性与恐惧</strong>。
+    ·若♄在牡羊=弱 → 动机性质不同——金星表现得<strong>干涩突兀</strong>，而非害羞。
+    <br><strong>结论：困难的性质随定位星陷落类型的不同而变化。</strong>
+  </div>
+
+  <p>如果两颗行星<strong>互相</strong>位于对方守护的星座中，则形成<strong>互容</strong>（Mutual Reception）——它们相互加强，即使本质并不特别兼容。若按<strong>定位链</strong>追溯所有行星，有时链条会终结于<strong>一颗行星</strong>——这颗星称为<strong>最终定位星</strong>（Final Dispositor），在星盘中具有极大主导性。</p>
+  </div>
+</div>
+
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section6_5')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>五、尊贵计分系统</h2>
+  <div id="section6_5">
+  <p>行星<strong>必然状态</strong>的评估通过一个<strong>计分系统</strong>完成。尊贵使行星表达更顺畅，影响力更强；陷落则代表困难，其影响扩展至该行星在星盘中<strong>所代表的一切</strong>。</p>
+
+  <!-- Scoring Table SVG -->
+  <svg class="svg-diagram" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
+    <defs><filter id="stbl"><feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.08"/></filter></defs>
+    <text x="280" y="18" text-anchor="middle" font-family="var(--font-display)" font-size="13" fill="var(--navy)" font-weight="700">必然尊贵与陷落计分表</text>
+    <!-- Dignities column -->
+    <rect x="15" y="30" width="255" height="180" rx="8" fill="#f0faf5" stroke="#2d6a4f" stroke-width="1" filter="url(#stbl)"/>
+    <text x="142" y="54" text-anchor="middle" font-size="13" fill="#2d6a4f" font-weight="700">尊贵 Dignities</text>
+    <text x="142" y="78" text-anchor="middle" font-size="11" fill="var(--text-body)">庙/入庙 Rulership +5</text>
+    <text x="142" y="100" text-anchor="middle" font-size="11" fill="var(--text-body)">旺/擢升 Exaltation +4</text>
+    <text x="142" y="122" text-anchor="middle" font-size="11" fill="var(--text-body)">三分主星 Triplicity +3</text>
+    <text x="142" y="144" text-anchor="middle" font-size="11" fill="var(--text-body)">界 Term +2</text>
+    <text x="142" y="166" text-anchor="middle" font-size="11" fill="var(--text-body)">面 Face +1</text>
+    <text x="142" y="192" text-anchor="middle" font-size="10" fill="var(--text-muted)">尊贵得分范围：0 ~ +15</text>
+    <!-- Debilities column -->
+    <rect x="290" y="30" width="255" height="180" rx="8" fill="#fef5f0" stroke="#c0392b" stroke-width="1" filter="url(#stbl)"/>
+    <text x="417" y="54" text-anchor="middle" font-size="13" fill="#c0392b" font-weight="700">陷落 Debilities</text>
+    <text x="417" y="90" text-anchor="middle" font-size="11" fill="var(--text-body)">陷/落陷 Detriment -5</text>
+    <text x="417" y="120" text-anchor="middle" font-size="11" fill="var(--text-body)">弱/落 Fall -4</text>
+    <text x="417" y="170" text-anchor="middle" font-size="11" fill="var(--text-muted);">次要尊贵无对应陷落</text>
+    <text x="417" y="192" text-anchor="middle" font-size="10" fill="var(--text-muted)">陷落得分范围：0 ~ -9</text>
+  </svg>
+
+  <div class="highlight">
+    <strong>重要提醒：</strong>初学者常犯的错误——认为陷落的水星=愚蠢的人，或陷落的金星=没有爱的能力。实际上，陷落行星表示该行星所代表领域的<strong>困难</strong>（取决于它所在的宫位和所主宰的宫位）。这些困难可以通过学习和努力来<strong>管理</strong>。同样，尊贵的行星也不自动等同于"好人"或"卓越品质"——一切都取决于<strong>整张星盘的动态关系</strong>。
+  </div>
+  </div>
+</div>
+
+<!-- Quiz 6 -->
+<div class="quiz-card reveal" id="quiz6">
+  <h3>第六讲 · 知识检测 <span style="font-size:0.8rem;color:var(--text-muted);">(每题 25 XP)</span></h3>
+  <p style="color:var(--text-muted);margin-bottom:14px;">完成以下4题检验学习成果</p>
+  <div id="quiz6Content"></div>
+</div>
+
+</section>
+
 <!-- NEXT LESSON -->
 <div style="text-align:center; padding: 40px 0 60px;" class="reveal">
   <button class="btn btn-primary" id="nextBtn" onclick="nextLesson()" style="font-size:1.02rem; padding: 14px 36px;">
@@ -1024,7 +1514,7 @@ function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e)
 const ACHIEVEMENTS = [
   { id: 'firstClick', name: '初次探索', desc: '与任意互动元素交互', icon: '🔍', xp: 0, cond: () => true },
   { id: 'firstQuiz', name: '初学者', desc: '完成任意一讲的测验', icon: '📝', xp: 0, cond: () => Object.values(S.done).some(v=>v) },
-  { id: 'allDone', name: '学有所成', desc: '完成全部三讲课程', icon: '🎓', xp: 0, cond: () => Object.keys(S.done).length >= 3 },
+  { id: 'allDone', name: '学有所成', desc: '完成全部三讲课程', icon: '🎓', xp: 0, cond: () => Object.keys(S.done).length >= 6 },
   { id: 'perfect', name: '满分学霸', desc: '任意一讲测验全对', icon: '💯', xp: 0, cond: () => Object.values(S.quiz).some(q => q.score >= 4) },
   { id: 'constellation', name: '星座大师', desc: '完成星座连线游戏', icon: '⭐', xp: 0, cond: () => S.constDone },
   { id: 'xp100', name: '知识猎手', desc: '累计获得 100 XP', icon: '🏅', xp: 0, cond: () => S.xp >= 100 },
@@ -1130,8 +1620,8 @@ function goLesson(n) {
     if (parseInt(b.dataset.lesson) === n) b.classList.add('active');
   });
   const btn = document.getElementById('nextBtn');
-  btn.textContent = n >= 3 ? '已完成全部课程' : '进入下一讲 →';
-  btn.onclick = n >= 3 ? (() => goLesson(1)) : nextLesson;
+  btn.textContent = n >= 6 ? '已完成全部课程' : '进入下一讲 →';
+  btn.onclick = n >= 6 ? (() => goLesson(1)) : nextLesson;
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -1146,11 +1636,11 @@ document.getElementById('courseNav').addEventListener('click', e => {
   if (pill) { addXp(2); goLesson(parseInt(pill.dataset.lesson)); }
 });
 
-function nextLesson() { if (S.lesson < 3) goLesson(S.lesson + 1); }
+function nextLesson() { if (S.lesson < 6) goLesson(S.lesson + 1); }
 
 function updateProgress() {
   const done = Object.keys(S.done).length;
-  const pct = Math.round((done / 3) * 100);
+  const pct = Math.round((done / 6) * 100);
   document.getElementById('progressLabel').textContent = pct + '%';
   document.getElementById('progressBar').style.width = pct + '%';
   document.querySelectorAll('.nav-pill').forEach(p => {
@@ -1476,6 +1966,48 @@ const quizBank = {
     { q: '传统占星师对待方盘和圆盘的态度是什么？',
       opts: ['只用圆盘', '只用方盘', '两者兼用，各有用途', '用文字记录'],
       ans: 2, expl: '两者兼用——方形便于计算和记录行星位置，圆形便于展示和解读相位关系。互补而非互斥。' }
+  ],
+  4: [
+    { q: '按照迦勒底秩序，行星从最远到最近的天球序列是什么？',
+      opts: ['月→水→金→日→火→木→土', '土→木→火→日→金→水→月', '日→月→火→木→土→金→水', '土→日→月→火→木→金→水'],
+      ans: 1, expl: '迦勒底秩序按视运动速度排列：土星（最慢最远）→ 木星 → 火星 → 太阳 → 金星 → 水星 → 月亮（最快最近）。太阳位于序列正中心。' },
+    { q: '以下哪组行星被传统占星学归类为"吉星"（Benefic）？',
+      opts: ['土星和火星', '木星和金星', '太阳和水星', '月亮和火星'],
+      ans: 1, expl: '木星（大吉星）和金星（小吉星）因其温和的热+湿性质有利生命与生长，被归类为吉星。土星（过冷+干）和火星（过热+干）则为凶星。' },
+    { q: '火星在昼夜派系（Sect）中被归类为夜星，主要原因是什么？',
+      opts: ['因为它只在夜晚可见', '因为黑夜的冷和湿可以缓和它的过度热与干', '因为火星是阴性行星', '因为火星离月亮最近'],
+      ans: 1, expl: '火星过度热+干（凶星），将其归入夜派是为了让夜晚的冷和湿缓和其极端性质，使其表达更具建设性。土星（过冷+干）同理被归入昼派——白日之热可中和其极端寒冷。' },
+    { q: '水星在占星学中被描述为"中性"或"暧昧"行星，这意味着什么？',
+      opts: ['水星没有任何影响力', '水星的性质随它所处的星座和接触的行星而变化', '水星对人类事务没有影响', '水星只对沟通有影响'],
+      ans: 1, expl: '水星性质暧昧不定——因近太阳而偏干，因近月亮而偏湿。在占星解读中，水星近吉则吉，近凶则凶，随其所接触的行星和所处星座而变化。' }
+  ],
+  5: [
+    { q: '黄道带（Zodiac）在天空中覆盖多宽的范围？',
+      opts: ['360°整圈', '约16°（黄道上下各8°）', '约30°', '90°的扇形区域'],
+      ans: 1, expl: '黄道带约16°宽——黄道上下各8°。这个宽度是为了涵盖所有可见行星的运动区域，因为行星的视轨迹并不完全与黄道重合。360°是黄道的全长而非宽度。' },
+    { q: '以下哪个星座属于"启动/本位"模式（Cardinal/Moveable）？',
+      opts: ['金牛 Taurus', '狮子 Leo', '天秤 Libra', '水瓶 Aquarius'],
+      ans: 2, expl: '启动/本位星座是每个季节开端的星座：白羊（春始）、巨蟹（夏始）、天秤（秋始）、摩羯（冬始）。它们代表强烈的行动驱力和快速但短暂的行动。' },
+    { q: '一颗行星在某个星座中"入庙"（Domicile）意味着什么？',
+      opts: ['行星在这个星座中完全失去影响力', '行星以自己的守护星座为家，表达最稳定、最富有成效', '行星处于其最弱的状态', '行星与星座没有特殊关系'],
+      ans: 1, expl: '入庙是行星最强的尊贵状态。如同国王统治自己的领土，行星在它守护的星座中以最稳定、最富有成效的方式表达其最佳本质。' },
+    { q: '十二星座中，哪个星座是火星的夜间守护（Nocturnal Rulership）？',
+      opts: ['白羊 Aries', '狮子 Leo', '射手 Sagittarius', '天蝎 Scorpio'],
+      ans: 3, expl: '火星守护两个星座：白羊（阳·昼·火·启动）和天蝎（阴·夜·水·固定）。天蝎是火星的夜间守护——其侵略性表现为更防御、更隐蔽的形式。' }
+  ],
+  6: [
+    { q: '在必然尊贵体系中，"庙"（Rulership/Domicile）值多少分？',
+      opts: ['+3', '+4', '+5', '+6'],
+      ans: 2, expl: '庙/入庙=+5分（最高尊贵），旺/擢升=+4分，三分主星=+3分，界=+2分，面=+1分。陷/落陷=-5分，弱/落=-4分。' },
+    { q: '金星在处女座（Virgo）处于什么状态？',
+      opts: ['入庙 Domicile', '擢升 Exaltation', '落陷 Detriment', '落 Fall'],
+      ans: 3, expl: '金星在双鱼座擢升（+4），在正对面的处女座则"落"（Fall, -4）。在处女座中，金星感到"笨拙"——表达不稳定、不得体。处女座（冷+干）与金星（热+湿）的本质相矛盾。' },
+    { q: '什么是"定位星"（Dispositor）？',
+      opts: ['星盘中位置最高的行星', '星座的守护星，管辖该星座中所有星体', '移动最快的行星', '与太阳合相的行星'],
+      ans: 1, expl: '定位星是星座的守护星——它"安排"（disposits）该星座中所有行星和天文点。定位星的强弱状态直接影响它所管辖行星的表达质量。' },
+    { q: '当两颗行星互相位于对方守护的星座中时，这种关系被称为什么？',
+      opts: ['合相 Conjunction', '互容 Mutual Reception', '对冲 Opposition', '三位一体 Triplicity'],
+      ans: 1, expl: '互容（Mutual Reception）发生在两颗行星互相位于对方的守护星座时——它们相互加强，即使本质并不特别兼容。例如：金星在摩羯、土星在天秤（金星守护天秤，土星守护摩羯）。' }
   ]
 };
 
@@ -1560,7 +2092,7 @@ function init() {
   updateProgress();
   renderAchievements();
   document.getElementById('xpCount').textContent = S.xp;
-  if (Object.keys(S.done).length >= 3) {
+  if (Object.keys(S.done).length >= 6) {
     document.getElementById('nextBtn').textContent = '已完成全部课程';
     document.getElementById('nextBtn').onclick = () => goLesson(1);
   }
