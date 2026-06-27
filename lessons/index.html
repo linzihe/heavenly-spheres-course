@@ -2,123 +2,208 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>天体论 · 占星学三讲 | On the Heavenly Spheres</title>
+
+<!-- Google Fonts: Chinese web fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
 <style>
 /* ============================================================
-   DESIGN SYSTEM — Light Scholarly Theme
+   DESIGN SYSTEM — Scholarly Warm Light Theme
    ============================================================ */
 :root {
-  --bg-page: #faf8f3;
+  --bg-page: #fbf9f5;
   --bg-card: #ffffff;
-  --bg-warm: #f5f0e8;
-  --bg-accent: #eef2f7;
-  --text-primary: #1e2532;
-  --text-body: #3a3f4b;
-  --text-muted: #787c87;
-  --navy: #1e3a5f;
+  --bg-warm: #f5f1e8;
+  --bg-accent: #eef3f8;
+  --text-primary: #1a2332;
+  --text-body: #3a414d;
+  --text-muted: #8a8794;
+  --navy: #1a3a5c;
   --navy-light: #2c5282;
   --gold: #9b7530;
   --gold-light: #c4983e;
-  --gold-bg: rgba(155,117,48,0.08);
-  --border: #e2ded6;
-  --border-light: #ece8e1;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+  --gold-bg: rgba(155,117,48,0.07);
+  --border: #e3ded5;
+  --border-light: #ede9e2;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.07);
+  --shadow-lg: 0 8px 36px rgba(0,0,0,0.10);
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
-  --font-display: 'Georgia', 'Noto Serif SC', 'Songti SC', serif;
-  --font-body: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+  --radius-xl: 28px;
+  --font-display: 'Noto Serif SC', 'Georgia', 'Songti SC', 'SimSun', serif;
+  --font-body: 'Noto Sans SC', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+  --font-latin: 'Playfair Display', 'Georgia', serif;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --max-width: 1000px;
+  --nav-height: 56px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  font-size: 16px;
+}
 body {
   font-family: var(--font-body);
   background: var(--bg-page);
   color: var(--text-body);
-  line-height: 1.8;
+  line-height: 1.85;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* ---- Layout ---- */
-.page-container { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
+.page-container {
+  max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
+}
+
+/* ---- Scroll-reveal animation ---- */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ---- XP Badge (floating) ---- */
+.xp-float {
+  position: fixed; bottom: 24px; right: 24px; z-index: 90;
+  background: var(--navy); color: #fff; padding: 12px 18px;
+  border-radius: 40px; font-size: 0.9rem; font-weight: 700;
+  box-shadow: 0 4px 20px rgba(26,58,92,0.25);
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; transition: var(--transition);
+  font-family: var(--font-body);
+}
+.xp-float:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(26,58,92,0.35); }
+.xp-float .xp-star { font-size: 1.3rem; animation: floatStar 2s ease-in-out infinite; }
+@keyframes floatStar {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.xp-popup {
+  position: fixed; bottom: 90px; right: 24px; z-index: 91;
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  box-shadow: var(--shadow-lg); min-width: 240px;
+  display: none; font-size: 0.9rem;
+}
+.xp-popup.show { display: block; animation: fadeSlideIn 0.3s ease; }
+.xp-popup h4 { color: var(--navy); margin-bottom: 8px; font-family: var(--font-display); }
+.xp-popup .ach-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border-light); }
+.xp-popup .ach-row.earned { color: var(--navy); font-weight: 600; }
+.xp-popup .ach-row.locked { color: var(--text-muted); }
+@keyframes fadeSlideIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
 /* ---- Header ---- */
 .site-header {
-  text-align: center; padding: 48px 20px 32px;
+  text-align: center; padding: 40px 16px 28px;
   border-bottom: 1px solid var(--border-light);
-  margin-bottom: 36px;
+  margin-bottom: 20px;
 }
-.site-header .brand {
+.site-header .ornament {
+  display: flex; justify-content: center; gap: 14px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.site-header .ornament svg { opacity: 0.7; }
+.site-header h1 {
   font-family: var(--font-display);
-  font-size: 2.2rem; color: var(--navy); letter-spacing: 0.04em;
-  margin-bottom: 4px;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--navy); letter-spacing: 0.04em;
+  margin-bottom: 4px; font-weight: 900;
 }
-.site-header .brand-sub {
-  font-size: 0.95rem; color: var(--text-muted);
-  letter-spacing: 0.08em; text-transform: uppercase;
+.site-header .sub {
+  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  color: var(--text-muted); letter-spacing: 0.06em;
+  font-family: var(--font-latin); font-style: italic;
 }
 
-/* ---- Navigation ---- */
+/* ---- Smart Navigation ---- */
 .course-nav {
-  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
-  margin-bottom: 40px; position: sticky; top: 16px; z-index: 50;
-  background: rgba(250,248,243,0.92); backdrop-filter: blur(12px);
-  padding: 10px 12px; border-radius: 48px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  position: sticky; top: 0; z-index: 80;
+  display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;
+  background: rgba(251,249,245,0.94); backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 8px 10px; border-bottom: 1px solid var(--border-light);
+  transition: transform 0.35s ease;
+  will-change: transform;
 }
+.course-nav.hidden { transform: translateY(-100%); }
+
 .nav-pill {
-  padding: 10px 22px; border-radius: 36px; border: 1px solid transparent;
+  padding: 9px 18px; border-radius: 32px; border: 1px solid transparent;
   background: transparent; color: var(--text-muted); cursor: pointer;
-  font-size: 0.93rem; font-family: var(--font-body); font-weight: 500;
+  font-size: 0.9rem; font-family: var(--font-body); font-weight: 500;
   transition: var(--transition); white-space: nowrap;
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 5px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
-.nav-pill:hover { color: var(--navy); border-color: var(--border); }
+.nav-pill:hover { color: var(--navy); background: var(--bg-accent); }
+.nav-pill:active { transform: scale(0.96); }
 .nav-pill.active {
   background: var(--navy); color: #fff; border-color: var(--navy);
-  box-shadow: 0 2px 8px rgba(30,58,95,0.2);
+  box-shadow: 0 2px 10px rgba(26,58,92,0.2);
 }
 .nav-pill.completed { color: #2d6a4f; }
+.nav-pill .nav-check { font-size: 0.75rem; opacity: 0; transition: opacity 0.3s; }
 .nav-pill.completed .nav-check { opacity: 1; }
-.nav-check { opacity: 0; font-size: 0.8rem; transition: opacity 0.3s; }
+.nav-pill svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-/* ---- Progress ---- */
-.progress-wrap { margin-bottom: 32px; }
-.progress-meta { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.84rem; color: var(--text-muted); }
+/* ---- Progress Bar ---- */
+.progress-wrap { margin-bottom: 24px; }
+.progress-meta { display: flex; justify-content: space-between; margin-bottom: 3px; font-size: 0.82rem; color: var(--text-muted); }
 .progress-track { height: 5px; background: var(--border); border-radius: 5px; overflow: hidden; }
 .progress-bar { height: 100%; background: linear-gradient(90deg, var(--navy), var(--gold)); border-radius: 5px; transition: width 0.8s ease; width: 0%; }
 
 /* ---- Lesson Sections ---- */
-.lesson { display: none; animation: fadeIn 0.45s ease; }
+.lesson { display: none; }
 .lesson.active { display: block; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ---- Cards ---- */
 .card {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); padding: 32px 36px; margin-bottom: 24px;
+  border-radius: var(--radius-lg); padding: 32px 36px; margin-bottom: 22px;
   box-shadow: var(--shadow-sm); transition: var(--transition);
+  position: relative; overflow: hidden;
 }
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(155,117,48,0.15), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.card:hover::before { opacity: 1; }
 .card:hover { box-shadow: var(--shadow-md); }
-.card .card-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: #fff; margin-bottom: 14px; }
-.card h2 { font-family: var(--font-display); font-size: 1.5rem; color: var(--navy); margin-bottom: 10px; letter-spacing: 0.02em; }
-.card h3 { font-family: var(--font-display); font-size: 1.25rem; color: var(--navy); margin-bottom: 8px; }
-.card h4 { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 6px; font-weight: 600; }
-.card p { color: var(--text-body); font-size: 0.97rem; margin-bottom: 12px; }
-.card ul, .card ol { padding-left: 22px; margin-bottom: 12px; }
-.card li { color: var(--text-body); font-size: 0.95rem; margin-bottom: 6px; }
+.card .card-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--navy); color: #fff; margin-bottom: 12px;
+}
+.card h2 {
+  font-family: var(--font-display); font-size: 1.4rem;
+  color: var(--navy); margin-bottom: 10px; letter-spacing: 0.02em; font-weight: 700;
+}
+.card h3 {
+  font-family: var(--font-display); font-size: 1.2rem;
+  color: var(--navy); margin-bottom: 8px; font-weight: 700;
+}
+.card h4 { font-size: 1.02rem; color: var(--text-primary); margin-bottom: 6px; font-weight: 600; }
+.card p { color: var(--text-body); font-size: 0.96rem; margin-bottom: 12px; }
+.card ul, .card ol { padding-left: 20px; margin-bottom: 12px; }
+.card li { color: var(--text-body); font-size: 0.94rem; margin-bottom: 6px; }
+
 .card .highlight {
   background: var(--gold-bg); border-left: 3px solid var(--gold);
   padding: 14px 18px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  margin: 16px 0; font-size: 0.94rem;
+  margin: 16px 0; font-size: 0.93rem;
 }
 
 /* ---- TTS Button ---- */
@@ -126,33 +211,59 @@ body {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; border-radius: 20px; cursor: pointer;
   background: var(--bg-accent); border: 1px solid var(--border);
-  color: var(--navy-light); font-size: 0.84rem; font-family: var(--font-body);
-  transition: var(--transition); margin-bottom: 8px;
+  color: var(--navy-light); font-size: 0.83rem;
+  font-family: var(--font-body); transition: var(--transition);
+  margin-bottom: 8px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 .tts-btn:hover { background: #dce4f0; border-color: #bcc8d8; }
-.tts-btn.playing { background: var(--navy); color: #fff; border-color: var(--navy); animation: ttsPulse 1.2s ease-in-out infinite; }
-.tts-btn svg { width: 16px; height: 16px; }
+.tts-btn:active { transform: scale(0.96); }
+.tts-btn.playing {
+  background: var(--navy); color: #fff; border-color: var(--navy);
+  animation: ttsPulse 1.2s ease-in-out infinite;
+}
+.tts-btn svg { width: 15px; height: 15px; }
 @keyframes ttsPulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.3); }
-  50% { box-shadow: 0 0 0 10px rgba(30,58,95,0); }
+  0%,100% { box-shadow: 0 0 0 0 rgba(26,58,92,0.25); }
+  50% { box-shadow: 0 0 0 12px rgba(26,58,92,0); }
 }
 
-/* ---- SVG Diagrams ---- */
-.svg-diagram { display: block; margin: 20px auto; max-width: 100%; }
-.svg-diagram text.title { font-family: var(--font-display); font-size: 14px; fill: var(--navy); font-weight: 700; }
-.svg-diagram text.label { font-family: var(--font-body); font-size: 11px; fill: var(--text-body); }
-.svg-diagram text.small { font-family: var(--font-body); font-size: 9px; fill: var(--text-muted); }
+/* ---- Interactive SVG Diagrams ---- */
+.svg-diagram { display: block; margin: 20px auto; max-width: 100%; cursor: default; }
+.svg-diagram .clickable { cursor: pointer; transition: opacity 0.2s; }
+.svg-diagram .clickable:hover { opacity: 0.8; }
 
 /* ---- Timeline ---- */
 .timeline-wrap { position: relative; padding: 8px 0; }
-.timeline-wrap::before { content:''; position:absolute; left:24px; top:0; bottom:0; width:2px; background:linear-gradient(180deg, var(--navy), var(--gold), var(--navy)); }
-.tl-item { position: relative; padding-left: 60px; margin-bottom: 18px; cursor: pointer; }
-.tl-dot { position: absolute; left:15px; top:4px; width:20px; height:20px; border-radius: 50%; background: #fff; border: 2px solid var(--navy); transition: var(--transition); }
-.tl-item:hover .tl-dot, .tl-item.open .tl-dot { background: var(--navy); }
-.tl-title { font-weight: 700; color: var(--navy); font-size: 0.98rem; display: flex; align-items: center; gap: 10px; }
-.tl-date { font-size: 0.8rem; color: var(--text-muted); background: var(--bg-accent); padding: 2px 10px; border-radius: 16px; white-space: nowrap; }
-.tl-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; font-size: 0.92rem; color: var(--text-body); }
-.tl-item.open .tl-body { max-height: 400px; margin-top: 10px; }
+.timeline-wrap::before {
+  content: ''; position: absolute; left: 22px; top: 0; bottom: 0;
+  width: 2px; background: linear-gradient(180deg, var(--navy), var(--gold), var(--navy));
+}
+.tl-item { position: relative; padding-left: 56px; margin-bottom: 14px; cursor: pointer; }
+.tl-dot {
+  position: absolute; left: 13px; top: 3px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--navy);
+  transition: var(--transition);
+}
+.tl-item:hover .tl-dot, .tl-item.open .tl-dot {
+  background: var(--navy); box-shadow: 0 0 0 4px rgba(26,58,92,0.1);
+}
+.tl-title {
+  font-weight: 700; color: var(--navy); font-size: 0.96rem;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.tl-date {
+  font-size: 0.78rem; color: var(--text-muted);
+  background: var(--bg-accent); padding: 2px 10px; border-radius: 16px; white-space: nowrap;
+}
+.tl-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s ease, margin 0.3s ease;
+  font-size: 0.91rem; color: var(--text-body);
+}
+.tl-item.open .tl-body { max-height: 500px; margin-top: 10px; }
 
 /* ---- Quiz ---- */
 .quiz-card {
@@ -160,54 +271,147 @@ body {
   border-radius: var(--radius-lg); padding: 32px 36px; margin: 28px 0;
   box-shadow: var(--shadow-sm);
 }
-.quiz-card h3 { font-family: var(--font-display); color: var(--navy); margin-bottom: 6px; }
-.quiz-q { font-size: 1.08rem; color: var(--text-primary); font-weight: 600; margin-bottom: 14px; }
-.quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+.quiz-card h3 { font-family: var(--font-display); color: var(--navy); margin-bottom: 6px; font-weight: 700; }
+.quiz-q { font-size: 1.04rem; color: var(--text-primary); font-weight: 600; margin-bottom: 12px; }
+.quiz-opts { display: flex; flex-direction: column; gap: 7px; }
 .quiz-opt {
-  padding: 14px 18px; border-radius: var(--radius-sm);
+  padding: 13px 18px; border-radius: var(--radius-sm);
   background: var(--bg-warm); border: 1px solid var(--border-light);
   cursor: pointer; transition: var(--transition);
-  color: var(--text-body); font-size: 0.94rem; text-align: left;
+  color: var(--text-body); font-size: 0.93rem; text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
-.quiz-opt:hover { border-color: var(--navy-light); background: #f0f4fa; }
-.quiz-opt.correct { background: #e6f4ea; border-color: #2d6a4f; color: #1b4332; pointer-events: none; }
-.quiz-opt.wrong { background: #fce4e4; border-color: #c53030; color: #742a2a; pointer-events: none; }
-.quiz-fb { margin-top: 12px; padding: 12px 16px; border-radius: var(--radius-sm); display: none; font-size: 0.93rem; }
+.quiz-opt:hover { border-color: var(--navy-light); background: #f0f5fb; }
+.quiz-opt:active { transform: scale(0.98); }
+.quiz-opt.correct { background: #e8f5e9; border-color: #2d6a4f; color: #1b4332; pointer-events: none; }
+.quiz-opt.wrong { background: #fce8e6; border-color: #c53030; color: #742a2a; pointer-events: none; }
+.quiz-fb { margin-top: 12px; padding: 12px 16px; border-radius: var(--radius-sm); display: none; font-size: 0.92rem; }
 .quiz-fb.show { display: block; }
-.quiz-fb.good { background: #e6f4ea; border: 1px solid #b7e4c7; color: #1b4332; }
-.quiz-fb.bad { background: #fce4e4; border: 1px solid #f4b3b3; color: #742a2a; }
+.quiz-fb.good { background: #e8f5e9; border: 1px solid #b7e4c7; color: #1b4332; }
+.quiz-fb.bad { background: #fce8e6; border: 1px solid #f4b3b3; color: #742a2a; }
+.quiz-combo { text-align: center; font-size: 1.1rem; margin-top: 14px; color: var(--gold); font-weight: 700; display: none; }
 
-/* ---- Element Diagram ---- */
-.element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 16px 0; }
-.element-tile { padding: 22px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border); background: #fff; transition: var(--transition); cursor: default; }
-.element-tile:hover { box-shadow: var(--shadow-md); }
+/* ---- Elements Grid ---- */
+.element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 16px 0; }
+.element-tile {
+  padding: 20px 16px; border-radius: var(--radius-md); text-align: center;
+  border: 1px solid var(--border); background: #fff; transition: var(--transition);
+  cursor: pointer;
+}
+.element-tile:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.element-tile:active { transform: scale(0.97); }
 .element-tile.fire { border-top: 3px solid #d45d3a; }
-.element-tile.air { border-top: 3px solid #d4b83a; }
+.element-tile.air { border-top: 3px solid #d4a83a; }
 .element-tile.water { border-top: 3px solid #3a8fd4; }
 .element-tile.earth { border-top: 3px solid #5a9e3a; }
-.element-tile .elem-symbol { font-size: 2.4rem; margin-bottom: 4px; }
-.element-tile .elem-name { font-weight: 700; font-size: 1.1rem; color: var(--text-primary); }
-.element-tile .elem-qualities { font-size: 0.85rem; color: var(--text-muted); }
-.element-tile .elem-desc { font-size: 0.88rem; color: var(--text-body); margin-top: 6px; }
+.element-tile .elem-icon svg { transition: transform 0.3s; }
+.element-tile:hover .elem-icon svg { transform: scale(1.1); }
+.element-tile .elem-name { font-weight: 700; font-size: 1.05rem; color: var(--text-primary); margin: 8px 0 2px; }
+.element-tile .elem-q { font-size: 0.82rem; color: var(--text-muted); }
+.element-tile .elem-desc { font-size: 0.86rem; color: var(--text-body); margin-top: 6px; }
 
-/* ---- Spheres Diagram ---- */
-.spheres-diagram { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 20px 0; }
-.sphere-row { padding: 12px 28px; border-radius: 36px; border: 1px solid var(--border); background: #fff; font-size: 0.92rem; cursor: pointer; transition: var(--transition); color: var(--text-body); text-align: center; }
+/* ---- Spheres Stack ---- */
+.spheres-diagram { display: flex; flex-direction: column; align-items: center; gap: 5px; margin: 18px 0; }
+.sphere-row {
+  padding: 11px 24px; border-radius: 32px; border: 1px solid var(--border);
+  background: #fff; font-size: 0.9rem; cursor: pointer;
+  transition: var(--transition); color: var(--text-body); text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
 .sphere-row:hover, .sphere-row.active { border-color: var(--gold); background: var(--gold-bg); color: var(--navy); font-weight: 600; }
-.sphere-detail { text-align: center; min-height: 60px; padding: 14px; color: var(--text-body); font-size: 0.93rem; background: var(--bg-warm); border-radius: var(--radius-md); margin-top: 8px; }
+.sphere-row:active { transform: scale(0.97); }
+.sphere-detail {
+  text-align: center; min-height: 50px; padding: 14px;
+  color: var(--text-body); font-size: 0.92rem;
+  background: var(--bg-warm); border-radius: var(--radius-md); margin-top: 6px;
+  transition: opacity 0.3s;
+}
 
 /* ---- Chart Gallery ---- */
-.gallery-row { display: flex; gap: 12px; overflow-x: auto; padding: 8px 0 16px; scroll-snap-type: x mandatory; }
-.gallery-item { flex: 0 0 180px; scroll-snap-align: start; padding: 18px; border-radius: var(--radius-md); text-align: center; background: #fff; border: 1px solid var(--border); cursor: pointer; transition: var(--transition); }
+.gallery-row {
+  display: flex; gap: 10px; overflow-x: auto; padding: 6px 0 14px;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+}
+.gallery-item {
+  flex: 0 0 160px; scroll-snap-align: start;
+  padding: 16px; border-radius: var(--radius-md); text-align: center;
+  background: #fff; border: 1px solid var(--border); cursor: pointer;
+  transition: var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
 .gallery-item:hover { border-color: var(--navy-light); }
-.gallery-item.selected { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(155,117,48,0.15); }
-.gallery-item .gi-icon { width: 60px; height: 60px; margin: 0 auto 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.gallery-item .gi-name { font-weight: 600; color: var(--navy); font-size: 0.92rem; }
-.gallery-item .gi-date { font-size: 0.8rem; color: var(--text-muted); }
-.gallery-detail { padding: 20px; background: var(--bg-warm); border-radius: var(--radius-md); min-height: 100px; margin-top: 8px; }
+.gallery-item.selected { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(155,117,48,0.12); }
+.gallery-item:active { transform: scale(0.96); }
+.gallery-detail { padding: 18px; background: var(--bg-warm); border-radius: var(--radius-md); min-height: 80px; margin-top: 6px; transition: opacity 0.3s; }
 
-/* ---- Image reference ---- */
-.img-ref { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--bg-accent); border-radius: var(--radius-sm); margin: 12px 0; font-size: 0.85rem; color: var(--text-muted); }
+/* ---- Constellation Builder Game ---- */
+.const-game {
+  position: relative; width: 100%; max-width: 500px; height: 320px;
+  margin: 16px auto; background: var(--bg-warm);
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+  overflow: hidden; cursor: crosshair;
+  -webkit-tap-highlight-color: transparent;
+}
+.const-game .star-dot {
+  position: absolute; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--gold); cursor: pointer; transform: translate(-50%, -50%);
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 2;
+}
+.const-game .star-dot:hover { transform: translate(-50%, -50%) scale(1.4); box-shadow: 0 0 12px rgba(155,117,48,0.5); }
+.const-game .star-dot.selected { background: var(--navy); box-shadow: 0 0 14px rgba(26,58,92,0.5); transform: translate(-50%, -50%) scale(1.3); }
+.const-game .conn-line {
+  position: absolute; height: 1.5px; background: var(--gold);
+  transform-origin: left center; z-index: 1; pointer-events: none;
+  opacity: 0.6;
+}
+.const-label {
+  position: absolute; transform: translate(-50%, -50%);
+  font-size: 0.7rem; color: var(--text-muted); pointer-events: none;
+  white-space: nowrap; z-index: 0;
+}
+.const-hint {
+  text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;
+}
+.const-success { display: none; text-align: center; color: var(--gold); font-weight: 700; margin-top: 4px; }
+
+/* ---- Mini Flashcards ---- */
+.flash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+.flash-card {
+  perspective: 600px; height: 140px; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.flash-inner {
+  position: relative; width: 100%; height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flash-card.flipped .flash-inner { transform: rotateY(180deg); }
+.flash-front, .flash-back {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-md); padding: 16px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+}
+.flash-front {
+  background: #fff; border: 1px solid var(--border);
+  font-weight: 600; color: var(--navy); font-size: 0.92rem;
+}
+.flash-back {
+  background: var(--bg-accent); border: 1px solid var(--navy-light);
+  transform: rotateY(180deg);
+  font-size: 0.85rem; color: var(--text-body); line-height: 1.6;
+}
+
+/* ---- Image ref ---- */
+.img-ref {
+  display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+  background: var(--bg-accent); border-radius: var(--radius-sm);
+  margin: 12px 0; font-size: 0.83rem; color: var(--text-muted);
+}
 .img-ref a { color: var(--navy-light); }
 
 /* ---- Buttons ---- */
@@ -216,95 +420,151 @@ body {
   padding: 12px 28px; border-radius: 40px; cursor: pointer;
   font-size: 0.95rem; font-family: var(--font-body); font-weight: 600;
   transition: var(--transition); border: none; text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
+.btn:active { transform: scale(0.96); }
 .btn-primary { background: var(--navy); color: #fff; }
-.btn-primary:hover { background: #1a3350; box-shadow: 0 4px 16px rgba(30,58,95,0.2); transform: translateY(-1px); }
+.btn-primary:hover { background: #152d48; box-shadow: 0 4px 16px rgba(26,58,92,0.2); }
 .btn-outline { background: #fff; border: 1.5px solid var(--navy); color: var(--navy); }
 .btn-outline:hover { background: var(--bg-accent); }
 
 /* ---- Toast ---- */
 .toast {
-  position: fixed; top: 24px; right: 24px; z-index: 1000;
-  padding: 16px 24px; border-radius: var(--radius-md);
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;
+  padding: 14px 24px; border-radius: var(--radius-md);
   background: #fff; border: 1px solid var(--border);
   box-shadow: var(--shadow-lg); color: var(--text-primary);
-  animation: slideRight 0.35s ease; font-size: 0.93rem;
-  display: flex; align-items: center; gap: 10px;
+  animation: toastIn 0.35s ease; font-size: 0.92rem;
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-body);
 }
-@keyframes slideRight { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-16px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
-  .card { padding: 22px 20px; }
-  .quiz-card { padding: 22px 20px; }
-  .site-header { padding: 32px 12px 24px; }
-  .site-header .brand { font-size: 1.6rem; }
-  .course-nav { gap: 3px; padding: 6px; border-radius: 32px; }
-  .nav-pill { padding: 8px 13px; font-size: 0.8rem; }
-  .gallery-item { flex: 0 0 140px; }
-  .element-grid { grid-template-columns: 1fr 1fr; }
+  html { font-size: 15px; scroll-padding-top: 70px; }
+  .page-container { padding: 0 14px; }
+  .card { padding: 22px 18px; border-radius: var(--radius-md); }
+  .card h2 { font-size: 1.25rem; }
+  .card h3 { font-size: 1.1rem; }
+  .card p { font-size: 0.92rem; }
+  .card li { font-size: 0.9rem; }
+
+  .quiz-card { padding: 22px 18px; }
+  .quiz-q { font-size: 0.96rem; }
+
+  .course-nav {
+    gap: 3px; padding: 6px;
+    border-radius: 0; overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .course-nav::-webkit-scrollbar { display: none; }
+  .nav-pill { padding: 7px 12px; font-size: 0.78rem; border-radius: 24px; flex-shrink: 0; }
+  .nav-pill svg { width: 12px; height: 12px; }
+
+  .site-header { padding: 28px 10px 20px; }
+  .site-header h1 { font-size: 1.4rem; }
+
+  .element-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .element-tile { padding: 14px 10px; }
+
+  .spheres-diagram { gap: 3px; }
+  .sphere-row { padding: 9px 16px; font-size: 0.82rem; border-radius: 24px; }
+
+  .gallery-item { flex: 0 0 130px; padding: 12px; }
+  .gallery-row { gap: 6px; }
+
+  .flash-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .flash-card { height: 120px; }
+  .flash-front { font-size: 0.82rem; }
+  .flash-back { font-size: 0.78rem; }
+
+  .tl-item { padding-left: 44px; }
+  .timeline-wrap::before { left: 16px; }
+  .tl-dot { left: 8px; width: 16px; height: 16px; }
+
+  .const-game { height: 250px; }
+
+  .xp-float { bottom: 16px; right: 12px; padding: 10px 14px; font-size: 0.8rem; }
+  .xp-popup { bottom: 76px; right: 12px; left: 12px; min-width: auto; }
 }
 
-/* ---- Print ---- */
-@media print {
-  .course-nav, .tts-btn, .progress-wrap, #toastBox { display: none; }
-  .card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+@media (max-width: 400px) {
+  html { font-size: 14px; }
+  .page-container { padding: 0 8px; }
+  .card { padding: 18px 14px; }
+  .quiz-card { padding: 18px 14px; }
+  .element-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .flash-grid { grid-template-columns: 1fr; }
+  .nav-pill { padding: 6px 10px; font-size: 0.72rem; }
 }
 
 /* ---- Scrollbar ---- */
-::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #d0ccc4; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #b0aca4; }
+::-webkit-scrollbar-thumb { background: #d5d0c8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #b0aba4; }
+
+/* ---- Print ---- */
+@media print {
+  .course-nav, .tts-btn, .progress-wrap, .xp-float, .xp-popup, #toastBox,
+  .const-game, .flash-card, .gallery-row { display: none; }
+  .card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+  .tl-body { max-height: none !important; }
+}
 </style>
 </head>
 <body>
 
 <div id="toastBox"></div>
 
+<!-- Floating XP badge -->
+<div class="xp-float" id="xpFloat" onclick="toggleXpPopup()">
+  <span class="xp-star">&#9733;</span>
+  <span id="xpCount">0</span> XP
+</div>
+<div class="xp-popup" id="xpPopup">
+  <h4>成就徽章</h4>
+  <div id="xpAchievements"></div>
+</div>
+
 <div class="page-container">
 
 <!-- ====== HEADER ====== -->
 <header class="site-header">
-  <!-- Inline SVG: constellation ornament -->
-  <svg width="180" height="40" viewBox="0 0 180 40" style="margin-bottom:12px;">
-    <circle cx="30" cy="20" r="2.5" fill="#1e3a5f" opacity="0.6"/>
-    <circle cx="55" cy="8" r="2" fill="#9b7530" opacity="0.7"/>
-    <circle cx="80" cy="22" r="2.5" fill="#1e3a5f" opacity="0.8"/>
-    <circle cx="105" cy="6" r="2" fill="#9b7530" opacity="0.6"/>
-    <circle cx="130" cy="18" r="2.5" fill="#1e3a5f" opacity="0.7"/>
-    <circle cx="150" cy="12" r="2" fill="#9b7530" opacity="0.8"/>
-    <line x1="30" y1="20" x2="55" y2="8" stroke="#9b7530" stroke-width="0.5" opacity="0.4"/>
-    <line x1="55" y1="8" x2="80" y2="22" stroke="#1e3a5f" stroke-width="0.5" opacity="0.4"/>
-    <line x1="80" y1="22" x2="105" y2="6" stroke="#9b7530" stroke-width="0.5" opacity="0.4"/>
-    <line x1="105" y1="6" x2="130" y2="18" stroke="#1e3a5f" stroke-width="0.5" opacity="0.4"/>
-    <line x1="130" y1="18" x2="150" y2="12" stroke="#9b7530" stroke-width="0.5" opacity="0.4"/>
-  </svg>
-  <div class="brand">天体论 · 占星学三讲</div>
-  <div class="brand-sub">On the Heavenly Spheres — A Course by Helena Avelar &amp; Luís Ribeiro</div>
+  <div class="ornament">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9b7530" stroke-width="1"><circle cx="12" cy="12" r="2"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9b7530" stroke-width="1"><circle cx="12" cy="12" r="2"/></svg>
+  </div>
+  <h1>天体论 · 占星学三讲</h1>
+  <div class="sub">On the Heavenly Spheres — A Course by Helena Avelar &amp; Luís Ribeiro</div>
 </header>
 
-<!-- ====== NAVIGATION ====== -->
+<!-- ====== NAVIGATION (smart hide) ====== -->
 <nav class="course-nav" id="courseNav">
   <button class="nav-pill active" data-lesson="1">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-    第一讲 · 占星学导论
-    <span class="nav-check">✓</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    第一讲<span class="nav-check">✓</span>
   </button>
   <button class="nav-pill" data-lesson="2">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/></svg>
-    第二讲 · 占星宇宙观
-    <span class="nav-check">✓</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/></svg>
+    第二讲<span class="nav-check">✓</span>
   </button>
   <button class="nav-pill" data-lesson="3">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="4"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
-    第三讲 · 星盘入门
-    <span class="nav-check">✓</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="4"/></svg>
+    第三讲<span class="nav-check">✓</span>
   </button>
 </nav>
 
 <!-- Progress -->
-<div class="progress-wrap">
+<div class="progress-wrap reveal">
   <div class="progress-meta"><span>课程总进度</span><span id="progressLabel">0%</span></div>
   <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
 </div>
@@ -314,10 +574,10 @@ body {
      ====================================================================== -->
 <section class="lesson active" id="lesson1">
 
-<!-- 1.1 The Heavens in Motion -->
-<div class="card">
+<!-- 1.1 -->
+<div class="card reveal">
   <div class="card-icon">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="10" ry="4"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="10" ry="4"/></svg>
   </div>
   <button class="tts-btn" onclick="speakSection(this, 'section1_1')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
@@ -330,13 +590,12 @@ body {
   <div class="highlight">
     <strong>理解天体运动与其对地上事件的影响，始终是人类追求的目标。</strong>数个世纪以来，专注的观天者仔细审视天空，寻找模式与周期。夜复一夜，他们研究行星运动的微妙变化，同时密切关注地上事件，试图找到两者之间的对应关系。经过漫长岁月的积累，这种努力开出了果实——人类推导出了连接星辰运动与世间万象的法则。占星学的钥匙由此被发现。
   </div>
-  <p>太阳、月亮和行星是天空中唯一相对于固定恒星背景不断移动的天体。除了相对于恒星的运动之外，行星还参与着更宏大的旋转——整个天穹连同所有恒星在一天之内从日出到日落再到日出的旋转。为了研究行星相对于天空的运动，我们使用<strong>天球坐标系统</strong>：黄道及其十二个分区（星座）。为了研究行星相对于地平线的运动，我们使用<strong>地面坐标系统</strong>：宫位，它将天空划分为从地平线投射出的片段。</p>
-  <p>这样，行星的运动通过它们在这两个坐标系统中的位置来<strong>度量和定性</strong>——也就是说，我们测量行星在宫位和星座中的位置。每个星座和宫位都有其特定含义，这些含义与行星的意义相结合，生成占星解读的核心。这些解读可以应用于描述任何类型的事件——个人或集体的。</p>
+  <p>太阳、月亮和行星是天空中唯一相对于固定恒星背景不断移动的天体。除了相对于恒星的运动之外，行星还参与着更宏大的旋转——整个天穹连同所有恒星在一天之内从日出到日落再到日出的旋转。为了研究行星相对于天空的运动，我们使用<strong>天球坐标系统</strong>：黄道及其十二个分区（星座）。为了研究行星相对于地平线的运动，我们使用<strong>地面坐标系统</strong>：宫位。每个星座和宫位都有其特定含义，这些含义与行星的意义相结合，生成占星解读的核心——可以应用于描述任何类型的事件，无论个人还是集体。</p>
   </div>
 </div>
 
 <!-- 1.2 Prediction -->
-<div class="card">
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section1_2')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
@@ -345,129 +604,73 @@ body {
   <div id="section1_2">
   <p>占星学体系的自然延伸就是<strong>预测</strong>的概念。如果可以通过解读天体运动来描述当下，那么逻辑上，也完全可以预见未来的天体运动并据此描述未来的现实。同理，也可以追溯过去的天体位置，从而描述过去的现实。占星学就是通过天体的运动及其与地球的关系，来<strong>描述现在、过去和未来的现实</strong>。</p>
   <div class="highlight">
-    预测最初应用于自然现象（如气候、洪水），随后扩展到政治和个人事件，它始终是占星学的<strong>核心目标</strong>之一。传统占星学并不回避预测——恰恰相反，预测能力是其区别于现代心理占星学的最重要特征。
+    预测最初应用于自然现象（如气候、洪水），随后扩展到政治和个人事件，它始终是占星学的<strong>核心目标</strong>之一。传统占星学并不回避预测——恰恰相反，这一预测能力是其区别于现代心理占星学的最重要特征。
   </div>
   </div>
 </div>
 
-<!-- 1.3 Branches -->
-<div class="card">
+<!-- 1.3 Branches - Interactive flash cards -->
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section1_3')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
   <h2>三、占星学的四大分支</h2>
-  <div id="section1_3">
-  <p>占星学知识已分化为若干专门的<strong>分支</strong>，每一个分支都以一套特定的规则应用于不同的解读背景中。传统上，占星学划分为四大分支：</p>
-
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap:16px; margin: 18px 0;">
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1.5" style="margin-bottom:8px;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
-      <h4>本命占星 <span style="font-weight:400;font-size:0.85rem;color:var(--text-muted);">Natal</span></h4>
-      <p style="font-size:0.9rem;">最广为人知的分支。通过个人出生时刻的星盘，分析性格、天赋、人生主题、健康趋势和命运走向。本命盘是一切占星实践的基石。</p>
-    </div>
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1.5" style="margin-bottom:8px;"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 1 1 6 0c0 3-3 5-3 8"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-      <h4>卜卦占星 <span style="font-weight:400;font-size:0.85rem;color:var(--text-muted);">Horary</span></h4>
-      <p style="font-size:0.9rem;">以问题提出的精确时刻起盘，通过严谨规则给出明确答案。是传统占星中最精确、最实用的技法之一。</p>
-    </div>
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1.5" style="margin-bottom:8px;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="4" x2="8" y2="22"/></svg>
-      <h4>择日占星 <span style="font-weight:400;font-size:0.85rem;color:var(--text-muted);">Electional</span></h4>
-      <p style="font-size:0.9rem;">为婚礼、开业、签约、旅行等活动选择最有利的时机。本质上是本命占星的"反向操作"——先设定目标，再寻找匹配的星盘。</p>
-    </div>
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1.5" style="margin-bottom:8px;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><path d="m4.93 4.93 14.14 14.14"/></svg>
-      <h4>世运占星 <span style="font-weight:400;font-size:0.85rem;color:var(--text-muted);">Mundane</span></h4>
-      <p style="font-size:0.9rem;">预测国家、君王、战争、瘟疫、经济周期等宏观事件。使用春分图、食相图、行星大合相等特殊星盘。</p>
-    </div>
+  <p style="color:var(--text-muted);">点击卡片翻转，了解每个分支的详细内容</p>
+  <div class="flash-grid">
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">本命占星<br><small style="color:var(--text-muted)">Natal</small></div><div class="flash-back">最广为人知的分支。通过个人出生时刻的星盘分析性格、天赋、人生主题与命运走向。本命盘是一切占星实践的<strong>基石</strong>。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">卜卦占星<br><small style="color:var(--text-muted)">Horary</small></div><div class="flash-back">以问题提出的精确时刻起盘，通过严谨规则给明确答案——"我会得到这份工作吗？""我的戒指在哪里？"最精确实用的传统技法之一。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">择日占星<br><small style="color:var(--text-muted)">Electional</small></div><div class="flash-back">为婚礼、开业、签约、旅行等选最优时机。先定目标，再找匹配星盘，是本命的"反向操作"。让行动获得最大宇宙支持。</div></div></div>
+    <div class="flash-card" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-front">世运占星<br><small style="color:var(--text-muted)">Mundane</small></div><div class="flash-back">预测国家、战争、瘟疫、经济周期等宏观事件。使用春分图、食相图、行星大合相，是占星学的宏观维度。</div></div></div>
   </div>
-
-  <p>占星学的规则是所有分支通用的。解读的差异来自<strong>背景语境</strong>——同样的行星配置，在本命盘中关于个人性格，在卜卦盘中则回答具体问题。此外，每个分支也有自己独有的技法。还有一种重要的交叉专业：<strong>医疗占星学</strong>，它结合了本命、卜卦和择日技术来诊断和治疗疾病。</p>
-  </div>
+  <p>占星学的规则是所有分支通用的。解读的差异来自<strong>背景语境</strong>——同样的行星配置，在本命盘中关于个人性格，在卜卦盘中则回答具体问题。此外还有一个重要的交叉专业：<strong>医疗占星学</strong>，结合本命、卜卦和择日技术来诊断和治疗疾病。</p>
 </div>
 
-<!-- 1.4 Astrological Types -->
-<div class="card">
+<!-- 1.4 Types vs Branches -->
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section1_4')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
   <h2>四、分支 vs 类型：一个重要的区分</h2>
   <div id="section1_4">
-  <p>理解占星学<strong>分支</strong>与占星学<strong>类型</strong>之间的区别至关重要。分支是由其关注的特定领域来划分的（如上节所述）；而类型则是将某种哲学或信仰体系<strong>整合进</strong>占星学实践的结果。因此我们有了心理占星学、人本占星学、整体占星学、业力占星学、秘传占星学、体验占星学等。</p>
+  <p>理解占星学<strong>分支</strong>与占星学<strong>类型</strong>之间的区别至关重要。分支是由其关注的特定领域来划分的；而类型则是将某种哲学或信仰体系<strong>整合进</strong>占星学实践的结果。因此才有了心理占星、人本占星、业力占星、秘传占星等变体。</p>
   <div class="highlight">
-    <strong>关键洞见：</strong>传统占星学（Traditional Astrology）并非"诸多占星学流派中的一种"——它就是<strong>占星学本身</strong>。这个词不指代另一种类型的占星学，而是指向占星学最原初、最完整的形态。传统占星学将实践带回其根源，还其原有的伟大与尊严。
+    <strong>关键洞见：</strong>传统占星学（Traditional Astrology）并非"诸多占星学流派中的一种"——它就是<strong>占星学本身</strong>最原初、最完整的形态。正如作者所写：<em>"传统占星学一词指的不是另一种类型的占星学，而是占星学本身。它将实践带回其根源，还其原有的伟大与尊严。"</em>
   </div>
-  <p>作者在书中坦率地写道：<em>"在我们的占星旅程中，我们曾研究和实践过现代占星学的心理和秘传版本。然而，正是在传统占星学中，我们找到了一个完整且有效的系统，使我们得以达成最渴望的目标：占星学的本质。"</em></p>
   </div>
 </div>
 
 <!-- 1.5 History Timeline -->
-<div class="card">
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section1_5')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
   <h2>五、占星学简史</h2>
-  <p style="color:var(--text-muted);">占星学是最古老的知识形式之一，其起源湮没于时间深处，但可以追溯至人类文明的诞生。点击每个时代展开详细内容。</p>
+  <p style="color:var(--text-muted);margin-bottom:12px;">占星学是最古老的知识形式之一，其起源可追溯至人类文明的诞生。点击每个时代展开详述。</p>
   <div class="timeline-wrap" id="timeline">
-    <div class="tl-item" onclick="toggleTL(this)">
-      <div class="tl-dot"></div>
-      <div class="tl-title">美索不达米亚时期 <span class="tl-date">约前2000年—前500年</span></div>
-      <div class="tl-body">
-        <p>占星学的<strong>摇篮</strong>。巴比伦人在美索不达米亚平原建立了最早的占星体系。最早的占星以<strong>世运预测</strong>为主（国王与国家命运），个人命盘尚未出现。所有宗教图景都有利于占星学的发展——占星实践由祭司进行，强调其神圣性和宗教面向。占星学发展在波斯占领时期（约前6世纪中叶）达到顶峰：历法得到完善，日食和其他天文现象被系统地记录。庙宇和宫殿按照星象对齐建造，大型建筑工程只在星象有利时才启动。</p>
-      </div>
-    </div>
-    <div class="tl-item" onclick="toggleTL(this)">
-      <div class="tl-dot"></div>
-      <div class="tl-title">希腊/希腊化时期 <span class="tl-date">约前700年—公元500年</span></div>
-      <div class="tl-body">
-        <p>贸易路线的扩展使占星学传入希腊文明，并被进一步发展为<strong>有学术地位的严谨学科</strong>。毕达哥拉斯（约前571—前497年）从中东带回了丰富的知识。柏拉图和亚里士多德创建了宇宙的物理和形而上学模型。最早的上升点（Ascendant）计算证据可追溯至约前200年——这一创新使得<strong>宫位的精确计算</strong>成为可能，占星盘及其所有组成要素由此诞生。托勒密的《四书》（Tetrabiblos）成为此后一千五百年的权威教科书。这是个人本命占星学诞生的时代。</p>
-      </div>
-    </div>
-    <div class="tl-item" onclick="toggleTL(this)">
-      <div class="tl-dot"></div>
-      <div class="tl-title">中世纪时期 <span class="tl-date">约500年—1500年</span></div>
-      <div class="tl-body">
-        <p>罗马帝国解体后，希腊化占星学衰落，但被<strong>阿拉伯/伊斯兰学者</strong>继承和发展。他们将大量希腊文献翻译成阿拉伯语，并添加了自己的数学创新和技法。11世纪起，随着基督教收复失地运动和十字军东征，知识交流的新阶段开启——大量阿拉伯和希腊著作被译成拉丁语传回欧洲。占星师在宫廷中担任国王和贵族的顾问，占星学在大学中作为七艺之一被教授。但与此同时，与天主教会的紧张关系使占星学成为一项风险的职业。</p>
-      </div>
-    </div>
-    <div class="tl-item" onclick="toggleTL(this)">
-      <div class="tl-dot"></div>
-      <div class="tl-title">文艺复兴 <span class="tl-date">约1400年—1700年</span></div>
-      <div class="tl-body">
-        <p>占星学的<strong>辉煌顶峰</strong>。15-16世纪，个体概念得到扩展，世界被以不同方式感知。科学与艺术重新焕发生机。然而古典技法开始受到质疑，对阿拉伯影响的排斥导致托勒密成为唯一权威——尽管托勒密并未提及若干重要的传统要素。这造成了<strong>中世纪与文艺复兴占星师之间的分裂</strong>。天文学与占星学仍是一体的：开普勒、伽利略、第谷·布拉赫都同时是天文学家与占星师。威廉·利利的《基督占星》（Christian Astrology, 1647）成为英语世界最重要的教科书。</p>
-      </div>
-    </div>
-    <div class="tl-item" onclick="toggleTL(this)">
-      <div class="tl-dot"></div>
-      <div class="tl-title">衰落 <span class="tl-date">约1700年—1900年</span></div>
-      <div class="tl-body">
-        <p>科学革命使天文学与占星学<strong>彻底分道扬镳</strong>。启蒙运动的理性主义否认星象影响的有效性。占星学实践逐渐衰退，在近两个世纪中<strong>几乎完全灭绝</strong>（17世纪末到19世纪中期）。大学不再教授占星学，占星知识只在少数秘传圈子中流传。曾经辉煌的占星传统沦为社会边缘的迷信活动。</p>
-      </div>
-    </div>
-    <div class="tl-item" onclick="toggleTL(this)">
-      <div class="tl-dot"></div>
-      <div class="tl-title">现代复兴 <span class="tl-date">19世纪末—至今</span></div>
-      <div class="tl-body">
-        <p>19世纪末，神智学运动推动了占星学的<strong>复兴</strong>。神智学家艾伦·利奥（Alan Leo）为避免触犯英国的反算命法律，创新性地将占星学转向<strong>性格分析</strong>方向——这标志着现代心理占星学的诞生。然而，这种重建基于一个本已残缺的模型，缺乏对传统的深入了解。1980年代起，以《基督占星》重版和大量希腊/中世纪文献翻译为标志，<strong>传统占星学迎来了全面复兴</strong>。被遗忘的卜卦和世运分支重新焕发生机。正如作者所言：<em>"当前，占星学开始了向其根源的缓慢回归，我们希望它能重新成为一套完整、坚实、功能性的知识体系。"</em></p>
-      </div>
-    </div>
+    <div class="tl-item" onclick="toggleTL(this)"><div class="tl-dot"></div><div class="tl-title">美索不达米亚时期 <span class="tl-date">约前2000—前500年</span></div><div class="tl-body"><p>占星学的<strong>摇篮</strong>。巴比伦人建立了最早的占星体系，以<strong>世运预测</strong>为主。占星实践由祭司进行，强调神圣性。在波斯占领时期达到顶峰：历法完善，日食被系统记录，庙宇按星象对齐建造。</p></div></div>
+    <div class="tl-item" onclick="toggleTL(this)"><div class="tl-dot"></div><div class="tl-title">希腊化时期 <span class="tl-date">约前700—公元500年</span></div><div class="tl-body"><p>贸易扩展使占星学传入希腊，发展为<strong>有学术地位的严谨学科</strong>。毕达哥拉斯从中东带回知识；柏拉图和亚里士多德创建宇宙模型。约前200年上升点首次计算——<strong>个人本命占星学诞生</strong>。托勒密的《四书》成为此后一千五百年的权威教科书。</p></div></div>
+    <div class="tl-item" onclick="toggleTL(this)"><div class="tl-dot"></div><div class="tl-title">中世纪 <span class="tl-date">约500—1500年</span></div><div class="tl-body"><p>阿拉伯/伊斯兰学者继承和发展了希腊占星学。大量文献被译成阿拉伯语，并添加了数学创新。11世纪起，阿拉伯和希腊著作被译成拉丁文传回欧洲。占星师成为宫廷顾问，占星学在大学中作为<strong>七艺之一</strong>被教授。</p></div></div>
+    <div class="tl-item" onclick="toggleTL(this)"><div class="tl-dot"></div><div class="tl-title">文艺复兴 <span class="tl-date">约1400—1700年</span></div><div class="tl-body"><p>占星学的<strong>辉煌顶峰</strong>。天文学与占星学仍是一体——开普勒、伽利略、第谷·布拉赫都兼具两重身份。威廉·利利的《基督占星》（1647）成为英语世界最重要教科书。但对托勒密的过度尊崇导致了中世纪与文艺复兴占星师之间的分裂。</p></div></div>
+    <div class="tl-item" onclick="toggleTL(this)"><div class="tl-dot"></div><div class="tl-title">衰落 <span class="tl-date">约1700—1900年</span></div><div class="tl-body"><p>科学革命使天文学与占星学<strong>彻底分道扬镳</strong>。启蒙运动的理性主义否认星象有效性。占星学在近两个世纪中几乎完全灭绝（17世纪末到19世纪中期）。大学不再教授占星学。</p></div></div>
+    <div class="tl-item" onclick="toggleTL(this)"><div class="tl-dot"></div><div class="tl-title">现代复兴 <span class="tl-date">19世纪末—至今</span></div><div class="tl-body"><p>19世纪末神智学运动推动复兴。艾伦·利奥为规避英国反算命法律，将占星转向<strong>性格分析</strong>方向——现代心理占星的起源。1980年代起，《基督占星》重版和大量古籍翻译标志<strong>传统占星学全面复兴</strong>。被遗忘的卜卦和世运分支重新焕发生机。</p></div></div>
   </div>
 </div>
 
-<!-- Historical Image Reference -->
-<div class="img-ref">
+<!-- Image ref -->
+<div class="img-ref reveal">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-  <span>参考图像：<a href="https://commons.wikimedia.org/wiki/File:Horoscope_from_the_book_of_the_birth_of_Iskandar_Wellcome_L0040161.jpg" target="_blank">伊斯坦达尔王子出生星盘（1384年，波斯手稿）— Wikimedia Commons</a> | <a href="https://www.sciencephoto.com/media/720083/view" target="_blank">16世纪占星星盘图 — Science Photo Library</a></span>
+  <span>参考图像：<a href="https://commons.wikimedia.org/wiki/File:Horoscope_from_the_book_of_the_birth_of_Iskandar_Wellcome_L0040161.jpg" target="_blank">伊斯坦达尔王子星盘（1384）</a> · <a href="https://www.sciencephoto.com/media/720083/view" target="_blank">16世纪占星星盘</a></span>
 </div>
 
-<!-- Lesson 1 Quiz -->
-<div class="quiz-card" id="quiz1">
-  <h3>第一讲 · 知识检测</h3>
-  <p style="color:var(--text-muted);margin-bottom:16px;">完成以下题目以检验学习成果（共4题）</p>
+<!-- Quiz 1 -->
+<div class="quiz-card reveal" id="quiz1">
+  <h3>第一讲 · 知识检测 <span style="font-size:0.8rem;color:var(--text-muted);">(每题 25 XP)</span></h3>
+  <p style="color:var(--text-muted);margin-bottom:14px;">完成以下4题检验学习成果</p>
   <div id="quiz1Content"></div>
+  <p class="quiz-combo" id="combo1" style="display:none;"></p>
 </div>
 
 </section>
@@ -477,10 +680,10 @@ body {
      ====================================================================== -->
 <section class="lesson" id="lesson2">
 
-<!-- 2.1 Models and Perspectives -->
-<div class="card">
+<!-- 2.1 Models -->
+<div class="card reveal">
   <div class="card-icon">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
   </div>
   <button class="tts-btn" onclick="speakSection(this, 'section2_1')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
@@ -488,240 +691,158 @@ body {
   </button>
   <h2>一、两种模型：日心 vs 地心</h2>
   <div id="section2_1">
-  <p>要理解占星学，首先必须理解其<strong>宇宙学基础</strong>。没有这一知识，就不可能真正把握占星学的根基、动力学和形而上学。</p>
-
-  <p>当现代人谈论"恒星和行星"时，脑海中浮现的图像通常是<strong>太阳系</strong>——太阳在中心，八颗已知行星（以及地球）围绕它运转。这种表述表达了太阳系的客观物理现实。虽在天文学上正确，但这种视角<strong>并不适合占星学</strong>。</p>
-
+  <p>要理解占星学，首先必须理解其<strong>宇宙学基础</strong>。当现代人谈论"恒星与行星"时，脑海中浮现的是太阳在中心的<strong>太阳系</strong>图像。这在天文学上正确，但<strong>并不适合占星学</strong>。</p>
   <div class="highlight">
-    <strong>占星学的观测视角是地球。</strong>所有占星知识都是根据从我们星球上可观测到的现实来构建的。因此，行星被描绘为<strong>地球观测者所见</strong>的模样——行星<em>看似</em>围绕地球运行，而非太阳。这不是"选择正确模型"的问题，而是理解<strong>两个模型表达了同一现实的不同视角</strong>：日心模型展示太阳系的全貌，地心模型则展示从地球上看到的天空。关键在于选择适合当前目标的模型——占星学从地球视角观测星体，因此采用地心模型。
+    <strong>占星学的观测视角是地球。</strong>所有占星知识都是根据从我们星球上可观测到的现实来构建的。行星被描绘为<strong>地球观测者所见</strong>的模样——看似围绕地球运行。这不是"选择正确模型"的问题，而是理解<strong>两个模型表达了同一现实的不同视角</strong>。关键在于选择适合目标的模型：占星学从地球视角观测星体，因此采用地心模型。
   </div>
   </div>
 </div>
 
-<!-- 2.2 Celestial Spheres Model SVG -->
-<div class="card">
+<!-- 2.2 Spheres -->
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section2_2')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
   <h2>二、天球模型：宇宙的层级结构</h2>
   <div id="section2_2">
-  <p>占星学的宇宙在<strong>托勒密模型</strong>（也称天球模型）中得到了极好的描绘。在这个模型中，地球位于宇宙的中心——<strong>最大物质性的点</strong>。七重行星球层（包括太阳和月亮）、固定恒星和黄道球层，以及最外层的原动天，以同心圆的方式逐层包裹。<em>点击下方各层查看详解：</em></p>
-  </div>
-
+  <p>占星学的宇宙在<strong>托勒密模型</strong>（天球模型）中得到了极好的描绘。地球位于宇宙的中心——最大物质性的点。七重行星球层以同心圆方式逐层包裹。<em>点击各层探索：</em></p>
   <div class="spheres-diagram" id="spheresStack">
-    <div class="sphere-row" data-sphere="primum" onclick="showSphere(this)" style="width:95%;">原动天 Primum Mobile — 最外层，驱动一切运动的第一因</div>
-    <div class="sphere-row" data-sphere="firmament" onclick="showSphere(this)" style="width:88%;">恒星天 Firmament — 固定恒星与黄道星座之所在</div>
-    <div class="sphere-row" data-sphere="saturn" onclick="showSphere(this)" style="width:80%;">土星天 ♄ — 最远的行星球层，"第七重天"</div>
-    <div class="sphere-row" data-sphere="jupiter" onclick="showSphere(this)" style="width:73%;">木星天 ♃ — 第二大行星，约12年运行一周</div>
-    <div class="sphere-row" data-sphere="mars" onclick="showSphere(this)" style="width:66%;">火星天 ♂ — 红色星球，约2年运行一周</div>
-    <div class="sphere-row" data-sphere="sun" onclick="showSphere(this)" style="width:58%;">太阳天 ☉ — 光的源头，占星学中最重要的天体之一</div>
-    <div class="sphere-row" data-sphere="venus" onclick="showSphere(this)" style="width:50%;">金星天 ♀ — 夜空中最亮的行星（月除外），始终靠近太阳</div>
-    <div class="sphere-row" data-sphere="mercury" onclick="showSphere(this)" style="width:42%;">水星天 ☿ — 运行最快的行星（约88天），永远在太阳28°以内</div>
-    <div class="sphere-row" data-sphere="moon" onclick="showSphere(this)" style="width:34%;">月亮天 ☽ — 离地球最近的天体球层，约28天运行一周</div>
-    <div class="sphere-row" data-sphere="elements" onclick="showSphere(this)" style="width:26%;border-color:var(--gold);">元素界 — 火·气·水·土 四元素球层</div>
+    <div class="sphere-row" data-sphere="primum" onclick="showSphere(this)" style="width:96%;">原动天 Primum Mobile — 最外层，驱动一切运动</div>
+    <div class="sphere-row" data-sphere="firmament" onclick="showSphere(this)" style="width:88%;">恒星天 Firmament — 固定恒星与黄道星座</div>
+    <div class="sphere-row" data-sphere="saturn" onclick="showSphere(this)" style="width:80%;">土星天 — 最远的行星球层</div>
+    <div class="sphere-row" data-sphere="jupiter" onclick="showSphere(this)" style="width:72%;">木星天 — 约12年运行一周</div>
+    <div class="sphere-row" data-sphere="mars" onclick="showSphere(this)" style="width:64%;">火星天 — 红色星球，约2年一周</div>
+    <div class="sphere-row" data-sphere="sun" onclick="showSphere(this)" style="width:56%;">太阳天 — 光的源头，占星最重要天体之一</div>
+    <div class="sphere-row" data-sphere="venus" onclick="showSphere(this)" style="width:48%;">金星天 — 最亮的行星（月除外）</div>
+    <div class="sphere-row" data-sphere="mercury" onclick="showSphere(this)" style="width:40%;">水星天 — 最快行星（约88天）</div>
+    <div class="sphere-row" data-sphere="moon" onclick="showSphere(this)" style="width:32%;">月亮天 — 离地球最近（约28天）</div>
+    <div class="sphere-row" data-sphere="elements" onclick="showSphere(this)" style="width:24%;border-color:var(--gold);">元素界 · 火气水土</div>
   </div>
   <div class="sphere-detail" id="sphereDetail">点击上方球层查看详细说明</div>
-
-  <div class="highlight" style="margin-top:16px;">
-    <strong>重要概念：</strong>按照传统，天体球层由<strong>精神实体</strong>构成，因此是完美和不朽的。只有元素界（也称"月下世界"——因为它在月球球层之下）由于其物质性而<strong>受制于变化</strong>。我们今天知道天体并非不变或完美，但从地球观测者的角度来看，这仍然是天空给我们的感受：完美、不变、宏大。从占星学的视角来看，这些预设依然有效：一切地上事物都将变化并终将消亡。天体运动与地上事件之间的这种<strong>关联</strong>，正是让我们能够解读和预见变化的依据。
+  <div class="highlight" style="margin-top:14px;">
+    天体球层由<strong>精神实体</strong>构成——完美、不朽。只有元素界（月下世界）受制于变化。今天我们知道天体并非不变物质，但从地球观测者角度，这正是天空给我们的感受。天体运动与地上事件的<strong>关联</strong>，使我们能够解读和预见变化。
+  </div>
   </div>
 </div>
 
-<!-- Public Domain Image Ref -->
-<div class="img-ref">
+<!-- Image ref -->
+<div class="img-ref reveal">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-  <span>参考图像：<a href="https://commons.wikimedia.org/wiki/File:Cellarius_ptolemaic_system_c2.jpg" target="_blank">Andreas Cellarius 托勒密天球体系版画（1660年）— Wikimedia Commons</a> | <a href="https://cudl.lib.cam.ac.uk/view/PR-INC-00005-B-00003-00096-C-01702-00008/1" target="_blank">Sacrobosco《天球论》中世纪木刻图（15世纪）— 剑桥大学数字图书馆</a></span>
+  <span>参考图像：<a href="https://commons.wikimedia.org/wiki/File:Cellarius_ptolemaic_system_c2.jpg" target="_blank">Cellarius托勒密天球版画(1660)</a> · <a href="https://cudl.lib.cam.ac.uk/view/PR-INC-00005-B-00003-00096-C-01702-00008/1" target="_blank">Sacrobosco《天球论》木刻(15世纪)</a></span>
 </div>
 
 <!-- 2.3 Primary Qualities -->
-<div class="card">
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section2_3')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
   <h2>三、第一性质：宇宙的基本力量</h2>
   <div id="section2_3">
-  <p>元素——宇宙的构建积木——本身又由四种<strong>基本法则</strong>构成，即<strong>第一性质</strong>（Primary Qualities）：<strong>热、冷、干、湿</strong>。这些性质代表了所有物质行为的动力学基础：能量、密度、阻力和可塑性。它们解释了元素的本质，进而解释了物质和物质世界的本质。</p>
+  <p>元素——宇宙的构建积木——由四种<strong>基本法则</strong>构成，即<strong>第一性质</strong>：<strong>热、冷、干、湿</strong>。这些性质代表了所有物质行为的动力学基础。</p>
 
-  <!-- SVG Diagram: Primary Qualities -->
-  <svg class="svg-diagram" viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
-    <text x="300" y="22" text-anchor="middle" class="title">第一性质 · Primary Qualities</text>
+  <!-- SVG Diagram -->
+  <svg class="svg-diagram" viewBox="0 0 620 270" xmlns="http://www.w3.org/2000/svg">
+    <defs><filter id="shadow1"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.08"/></filter></defs>
+    <text x="310" y="22" text-anchor="middle" font-family="var(--font-display)" font-size="14" fill="var(--navy)" font-weight="700">第一性质 · Primary Qualities</text>
     <!-- Hot -->
-    <rect x="40" y="40" width="240" height="85" rx="8" fill="#fff5f0" stroke="#d45d3a" stroke-width="1.5"/>
-    <text x="160" y="68" text-anchor="middle" class="label" font-weight="700" fill="#c0392b">热 Hot（阳性·主动）</text>
-    <text x="160" y="88" text-anchor="middle" class="small">活跃、能量充沛、辐射、离心</text>
-    <text x="160" y="106" text-anchor="middle" class="small">明亮、轻盈、精微、扩张</text>
+    <rect x="30" y="40" width="260" height="95" rx="10" fill="#fff8f5" stroke="#d45d3a" stroke-width="1.3" filter="url(#shadow1)"/>
+    <text x="160" y="70" text-anchor="middle" font-size="13" fill="#c0392b" font-weight="700">热 Hot · 阳性主动</text>
+    <text x="160" y="92" text-anchor="middle" font-size="10" fill="var(--text-body)">活跃、能量充沛、辐射、离心</text>
+    <text x="160" y="110" text-anchor="middle" font-size="10" fill="var(--text-body)">明亮、轻盈、精微、扩张</text>
     <!-- Cold -->
-    <rect x="320" y="40" width="240" height="85" rx="8" fill="#f0f4fa" stroke="#3a8fd4" stroke-width="1.5"/>
-    <text x="440" y="68" text-anchor="middle" class="label" font-weight="700" fill="#2471a3">冷 Cold（阴性·被动）</text>
-    <text x="440" y="88" text-anchor="middle" class="small">静止、吸收、向心、黑暗</text>
-    <text x="440" y="106" text-anchor="middle" class="small">沉重、致密、收缩、内敛</text>
+    <rect x="330" y="40" width="260" height="95" rx="10" fill="#f5f8ff" stroke="#3a8fd4" stroke-width="1.3" filter="url(#shadow1)"/>
+    <text x="460" y="70" text-anchor="middle" font-size="13" fill="#2471a3" font-weight="700">冷 Cold · 阴性被动</text>
+    <text x="460" y="92" text-anchor="middle" font-size="10" fill="var(--text-body)">静止、吸收、向心、黑暗</text>
+    <text x="460" y="110" text-anchor="middle" font-size="10" fill="var(--text-body)">沉重、致密、收缩、内敛</text>
     <!-- Dry -->
-    <rect x="40" y="145" width="240" height="85" rx="8" fill="#fffdf0" stroke="#d4b83a" stroke-width="1.5"/>
-    <text x="160" y="173" text-anchor="middle" class="label" font-weight="700" fill="#9a7d0a">干 Dry（被动·由热产生）</text>
-    <text x="160" y="193" text-anchor="middle" class="small">抵抗、坚硬、刚强、维持形状</text>
-    <text x="160" y="211" text-anchor="middle" class="small">易碎、粗糙、结晶化、结构化</text>
+    <rect x="30" y="150" width="260" height="95" rx="10" fill="#fffdf5" stroke="#d4a83a" stroke-width="1.3" filter="url(#shadow1)"/>
+    <text x="160" y="180" text-anchor="middle" font-size="13" fill="#9a7d0a" font-weight="700">干 Dry · 被动（由热生）</text>
+    <text x="160" y="202" text-anchor="middle" font-size="10" fill="var(--text-body)">抵抗、坚硬、维持形状</text>
+    <text x="160" y="220" text-anchor="middle" font-size="10" fill="var(--text-body)">结晶化、结构化、粗糙</text>
     <!-- Moist -->
-    <rect x="320" y="145" width="240" height="85" rx="8" fill="#f0faf5" stroke="#5a9e3a" stroke-width="1.5"/>
-    <text x="440" y="173" text-anchor="middle" class="label" font-weight="700" fill="#1e7e34">湿 Moist（被动·由冷产生）</text>
-    <text x="440" y="193" text-anchor="middle" class="small">可塑、流动、适应、连接</text>
-    <text x="440" y="211" text-anchor="middle" class="small">柔软、灵活、渗透、融合</text>
+    <rect x="330" y="150" width="260" height="95" rx="10" fill="#f5fdf8" stroke="#5a9e3a" stroke-width="1.3" filter="url(#shadow1)"/>
+    <text x="460" y="180" text-anchor="middle" font-size="13" fill="#1e7e34" font-weight="700">湿 Moist · 被动（由冷生）</text>
+    <text x="460" y="202" text-anchor="middle" font-size="10" fill="var(--text-body)">可塑、流动、适应</text>
+    <text x="460" y="220" text-anchor="middle" font-size="10" fill="var(--text-body)">柔软、灵活、渗透</text>
   </svg>
-
-  <p>热和冷为整个系统注入<strong>动力</strong>，因此被称为<strong>主动性质</strong>。它们与能量的概念相关：热代表活跃、能量充沛、辐射、离心、明亮、轻盈和精微；冷代表静止、吸收、向心、黑暗、沉重和致密。热对应<strong>阳性</strong>——扩张和动态；冷对应<strong>阴性</strong>——收缩和静态。</p>
-
-  <p>干和湿被称为<strong>被动性质</strong>，与<strong>形态</strong>的概念相关。干产生于热——热量的增加导致干燥（如太阳下晾晒任何东西）。它代表抵抗、坚硬、刚强、结晶化。湿产生于冷——冷本身不代表形态，而是代表凝聚和形态的原则。湿具有可塑性、流动性、适应性和渗透性。</p>
   </div>
 </div>
 
-<!-- 2.4 Formation of Elements -->
-<div class="card">
+<!-- 2.4 Four Elements -->
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section2_4')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
   <h2>四、四元素的形成</h2>
   <div id="section2_4">
-  <p>每个元素是由<strong>两种第一性质</strong>组合而成的：一个主动性质 + 一个被动性质。</p>
-
-  <!-- SVG: Element Formation -->
-  <svg class="svg-diagram" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
-    <text x="300" y="22" text-anchor="middle" class="title">元素的形成 · Formation of the Elements</text>
-    <!-- Center: Primary Qualities -->
-    <circle cx="300" cy="155" r="55" fill="#f5f0e8" stroke="#9b7530" stroke-width="2"/>
-    <text x="300" y="148" text-anchor="middle" font-size="10" fill="#1e3a5f">热+冷</text>
-    <text x="300" y="162" text-anchor="middle" font-size="10" fill="#1e3a5f">干+湿</text>
-    <text x="300" y="178" text-anchor="middle" font-size="9" fill="#9b7530">第一性质</text>
-    <!-- Fire (top right) -->
-    <circle cx="460" cy="80" r="50" fill="#fff5f0" stroke="#d45d3a" stroke-width="2"/>
-    <text x="460" y="70" text-anchor="middle" font-size="18" fill="#c0392b">🔥</text>
-    <text x="460" y="90" text-anchor="middle" class="label" font-weight="700" fill="#c0392b">火 Fire</text>
-    <text x="460" y="112" text-anchor="middle" class="small">热 + 干</text>
-    <line x1="340" y1="130" x2="420" y2="105" stroke="#d45d3a" stroke-width="1" opacity="0.4"/>
-    <!-- Air (bottom right) -->
-    <circle cx="460" cy="240" r="50" fill="#fffdf0" stroke="#d4b83a" stroke-width="2"/>
-    <text x="460" y="230" text-anchor="middle" font-size="18">💨</text>
-    <text x="460" y="250" text-anchor="middle" class="label" font-weight="700" fill="#9a7d0a">气 Air</text>
-    <text x="460" y="272" text-anchor="middle" class="small">热 + 湿</text>
-    <line x1="340" y1="180" x2="420" y2="215" stroke="#d4b83a" stroke-width="1" opacity="0.4"/>
-    <!-- Water (bottom left) -->
-    <circle cx="140" cy="240" r="50" fill="#f0f4fa" stroke="#3a8fd4" stroke-width="2"/>
-    <text x="140" y="230" text-anchor="middle" font-size="18">💧</text>
-    <text x="140" y="250" text-anchor="middle" class="label" font-weight="700" fill="#2471a3">水 Water</text>
-    <text x="140" y="272" text-anchor="middle" class="small">冷 + 湿</text>
-    <line x1="260" y1="180" x2="180" y2="215" stroke="#3a8fd4" stroke-width="1" opacity="0.4"/>
-    <!-- Earth (top left) -->
-    <circle cx="140" cy="80" r="50" fill="#f0faf5" stroke="#5a9e3a" stroke-width="2"/>
-    <text x="140" y="70" text-anchor="middle" font-size="18">🪨</text>
-    <text x="140" y="90" text-anchor="middle" class="label" font-weight="700" fill="#1e7e34">土 Earth</text>
-    <text x="140" y="112" text-anchor="middle" class="small">冷 + 干</text>
-    <line x1="260" y1="130" x2="180" y2="105" stroke="#5a9e3a" stroke-width="1" opacity="0.4"/>
-  </svg>
-
+  <p>每个元素由<strong>两种第一性质</strong>组成（一个主动+一个被动）。点击每个元素查看详情：</p>
   <div class="element-grid">
-    <div class="element-tile fire">
-      <div class="elem-symbol">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#d45d3a" stroke-width="1.5"><path d="M12 2c-3 5-8 8-8 13a8 8 0 1 0 16 0c0-5-5-8-8-13z"/></svg>
-      </div>
-      <div class="elem-name">火 · Fire</div>
-      <div class="elem-qualities">热 + 干 · 阳性</div>
-      <div class="elem-desc">扩张、辐射，自然地在不迎合外部环境的情况下施加自身。照亮和激活一切，但也消耗和转化。</div>
+    <div class="element-tile fire" onclick="addXp(5);this.style.transform='scale(1.03)';setTimeout(()=>this.style.transform='',300)">
+      <div class="elem-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#d45d3a" stroke-width="1.5"><path d="M12 2c-3 5-8 8-8 13a8 8 0 1 0 16 0c0-5-5-8-8-13z"/></svg></div>
+      <div class="elem-name">火 Fire</div><div class="elem-q">热 + 干 · 阳性</div>
+      <div class="elem-desc">扩张辐射，自然施加自身而不迎合外部。照亮、激活、转化。</div>
     </div>
-    <div class="element-tile earth">
-      <div class="elem-symbol">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#5a9e3a" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
-      </div>
-      <div class="elem-name">土 · Earth</div>
-      <div class="elem-qualities">冷 + 干 · 阴性</div>
-      <div class="elem-desc">凝固、收缩、坚硬、不屈服。通过持久性和不变性来抵抗，但也结构化并赋予凝聚力和稳定性。</div>
+    <div class="element-tile air" onclick="addXp(5);this.style.transform='scale(1.03)';setTimeout(()=>this.style.transform='',300)">
+      <div class="elem-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#d4a83a" stroke-width="1.5"><path d="M2 12h20M2 8c3-4 9-4 12 0M2 16c4 4 9 4 12 0"/></svg></div>
+      <div class="elem-name">气 Air</div><div class="elem-q">热 + 湿 · 阳性</div>
+      <div class="elem-desc">动态而多变，灵活且分散。自由扩展，善于连接和传播。</div>
     </div>
-    <div class="element-tile air">
-      <div class="elem-symbol">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#d4b83a" stroke-width="1.5"><path d="M2 12h20M2 8c3-4 9-4 12 0M2 16c4 4 9 4 12 0"/></svg>
-      </div>
-      <div class="elem-name">气 · Air</div>
-      <div class="elem-qualities">热 + 湿 · 阳性</div>
-      <div class="elem-desc">同样动态（热）但具有适应性（湿）。以多变、灵活和分散的活动为特征。自由地向任何方向扩展。</div>
+    <div class="element-tile water" onclick="addXp(5);this.style.transform='scale(1.03)';setTimeout(()=>this.style.transform='',300)">
+      <div class="elem-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3a8fd4" stroke-width="1.5"><path d="M12 2C9 7 4 10 4 15a8 8 0 0 0 16 0c0-5-3-8-8-13z"/></svg></div>
+      <div class="elem-name">水 Water</div><div class="elem-q">冷 + 湿 · 阴性</div>
+      <div class="elem-desc">接纳致密，极强可塑性。自我塑造、吸收影响、渗透溶解。</div>
     </div>
-    <div class="element-tile water">
-      <div class="elem-symbol">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#3a8fd4" stroke-width="1.5"><path d="M12 2C9 7 4 10 4 15a8 8 0 0 0 16 0c0-5-3-8-8-13z"/></svg>
-      </div>
-      <div class="elem-name">水 · Water</div>
-      <div class="elem-qualities">冷 + 湿 · 阴性</div>
-      <div class="elem-desc">以接纳性和密度为特征（冷），但具有极强的可塑性（湿）。自我塑造、吸收影响、渗透和溶解结构。</div>
+    <div class="element-tile earth" onclick="addXp(5);this.style.transform='scale(1.03)';setTimeout(()=>this.style.transform='',300)">
+      <div class="elem-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5a9e3a" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="elem-name">土 Earth</div><div class="elem-q">冷 + 干 · 阴性</div>
+      <div class="elem-desc">凝固收缩、坚硬持久。通过不变性抵抗，但结构化并赋予稳定。</div>
     </div>
   </div>
+  <p>热和冷是<strong>主动性质</strong>，关联能量——热为阳性（扩张），冷为阴性（收缩）。干和湿是<strong>被动性质</strong>，关联形态——干定形（刚性），湿塑形（柔性）。四元素以不同比例存在于一切事物中，是<strong>天体事件与地球现实之间的桥梁</strong>。</p>
   </div>
 </div>
 
-<!-- 2.5 Spheres of Elements -->
-<div class="card">
+<!-- 2.5 Temperaments -->
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section2_5')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
-  <h2>五、元素球层与月下世界</h2>
+  <h2>五、四种气质</h2>
   <div id="section2_5">
-  <p>在月亮球层内部，地球被四个元素层包裹：</p>
-  <p><strong>土</strong>是最致密的元素，占据月下世界的中心——大陆、山脉。由于其重力，它代表一切倾向于静止不变的事物（如岩石）。</p>
-  <p><strong>水</strong>占据下一个球层——海洋、河流、湖泊。湿性赋予水极大的可塑性和适应性，使其成为聚合元素，防止物体变得干燥和脆弱。</p>
-  <p><strong>气</strong>对应第三层——大气层。它轻盈且具有穿透力，渗透和穿越一切障碍物。</p>
-  <p><strong>火</strong>是最外层的元素球层——大气最上层，摩擦发生之处，宇宙辐射击中之处。现代可将其对应为电离层或极光。</p>
-  <div class="highlight">
-    <strong>核心洞见：</strong>地球上存在的一切都与某一个元素或元素的混合相关联（准确来说，火、土、气、水以不同比例存在于一切事物中）。每一个星座和每一颗行星也都与某一个元素关联。因此，天体运动和配置可以从<strong>元素的运动与组合</strong>的视角来解读。元素是天体事件与地球现实之间的<strong>桥梁</strong>。
-  </div>
-  </div>
-</div>
-
-<!-- 2.6 Temperaments -->
-<div class="card">
-  <button class="tts-btn" onclick="speakSection(this, 'section2_6')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
-    朗读本节
-  </button>
-  <h2>六、四种气质 Temperaments</h2>
-  <div id="section2_6">
-  <p>四种元素也通过<strong>四种气质</strong>在人类身上显现：<strong>胆汁质、多血质、忧郁质、黏液质</strong>，分别对应火、气、土、水。气质定义了古人所称的每个人的<strong>"体质"（Complexion）</strong>：一组身体和行为特征，以及心理和新陈代谢的倾向。每种气质关联一组行为模式、特定的身体结构和某种病理学倾向。</p>
-
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px; margin: 16px 0;">
-    <div style="padding:18px; border-radius:var(--radius-md); border-left:4px solid #d45d3a; background:#fffdf8;">
+  <p>四元素通过<strong>四种气质</strong>在人类身上显现：胆汁质、多血质、忧郁质、黏液质，分别对应火、气、土、水。气质定义了每个人的<strong>"体质"（Complexion）</strong>——身体与行为特征的总和。在传统占星中，判断主导气质是<strong>解读星盘的第一步</strong>，它决定了整个解读的基调。</p>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin:14px 0;">
+    <div style="padding:16px; border-radius:var(--radius-md); border-left:4px solid #d45d3a; background:#fff;">
       <h4 style="color:#c0392b;">胆汁质 Choleric</h4>
-      <p style="font-size:0.9rem;color:var(--text-muted);">火元素 · 热+干</p>
-      <p style="font-size:0.92rem;">领导者、行动派。果断、热烈、精力充沛但易怒。身体结构偏瘦、肌肉线条分明、体温偏高。天生的开拓者和指挥官。</p>
+      <p style="font-size:0.85rem;color:var(--text-muted);">火 · 热+干</p>
+      <p style="font-size:0.89rem;">领导者、行动派。果断热烈、精力充沛但易怒。偏瘦体格、肌肉线条分明。天生指挥官。</p>
     </div>
-    <div style="padding:18px; border-radius:var(--radius-md); border-left:4px solid #d4b83a; background:#fffdf8;">
+    <div style="padding:16px; border-radius:var(--radius-md); border-left:4px solid #d4a83a; background:#fff;">
       <h4 style="color:#9a7d0a;">多血质 Sanguine</h4>
-      <p style="font-size:0.9rem;color:var(--text-muted);">气元素 · 热+湿</p>
-      <p style="font-size:0.92rem;">社交家、乐观主义者。好奇、灵活、善于沟通但可能善变。体格偏丰满、面色红润。天生的交际者和乐天派。</p>
+      <p style="font-size:0.85rem;color:var(--text-muted);">气 · 热+湿</p>
+      <p style="font-size:0.89rem;">社交家、乐观者。好奇灵活但易变。体格偏丰满、面色红润。天生交际者。</p>
     </div>
-    <div style="padding:18px; border-radius:var(--radius-md); border-left:4px solid #5a9e3a; background:#fffdf8;">
+    <div style="padding:16px; border-radius:var(--radius-md); border-left:4px solid #5a9e3a; background:#fff;">
       <h4 style="color:#1e7e34;">忧郁质 Melancholic</h4>
-      <p style="font-size:0.9rem;color:var(--text-muted);">土元素 · 冷+干</p>
-      <p style="font-size:0.92rem;">思想者、完美主义者。深沉、持久、严谨但可能忧虑。身体偏瘦、骨骼突出。天生的分析者和战略家。</p>
+      <p style="font-size:0.85rem;color:var(--text-muted);">土 · 冷+干</p>
+      <p style="font-size:0.89rem;">思想者、完美主义者。深沉持久但易忧虑。偏瘦体格、骨骼突出。天生分析者。</p>
     </div>
-    <div style="padding:18px; border-radius:var(--radius-md); border-left:4px solid #3a8fd4; background:#fffdf8;">
+    <div style="padding:16px; border-radius:var(--radius-md); border-left:4px solid #3a8fd4; background:#fff;">
       <h4 style="color:#2471a3;">黏液质 Phlegmatic</h4>
-      <p style="font-size:0.9rem;color:var(--text-muted);">水元素 · 冷+湿</p>
-      <p style="font-size:0.92rem;">和平缔造者、共情者。安静、包容、忠诚但可能被动。体格偏柔软、圆润。天生的倾听者和调解人。</p>
+      <p style="font-size:0.85rem;color:var(--text-muted);">水 · 冷+湿</p>
+      <p style="font-size:0.89rem;">和平者、共情者。安静包容但易被动。体格柔软圆润。天生倾听者。</p>
     </div>
   </div>
-
-  <p>在传统占星学中，判断一个人的<strong>主导气质</strong>是解读星盘的第一步。它决定了整个解读的基调——正如作者在附录中所说，气质是"解读的底色"，所有后续的行星与宫位解读都在此基础之上展开。重要的一点是：每个人的气质都是<strong>四种类型的混合</strong>，只是比例不同。很少人是"纯种"的某一种气质。</p>
   </div>
 </div>
 
-<!-- Reference Image -->
-<div class="img-ref">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-  <span>参考图像：<a href="https://www.sciencephoto.com/media/364095/view" target="_blank">托勒密世界体系图解 — Science Photo Library（Oliver Lodge, 1893, 公共领域）</a> | 16世纪气质类型版画（见原书 Figure 16, p.15）</span>
-</div>
-
-<!-- Lesson 2 Quiz -->
-<div class="quiz-card" id="quiz2">
-  <h3>第二讲 · 知识检测</h3>
-  <p style="color:var(--text-muted);margin-bottom:16px;">完成以下题目以检验学习成果（共4题）</p>
+<!-- Quiz 2 -->
+<div class="quiz-card reveal" id="quiz2">
+  <h3>第二讲 · 知识检测 <span style="font-size:0.8rem;color:var(--text-muted);">(每题 25 XP)</span></h3>
+  <p style="color:var(--text-muted);margin-bottom:14px;">完成以下4题检验学习成果</p>
   <div id="quiz2Content"></div>
 </div>
 
@@ -732,10 +853,10 @@ body {
      ====================================================================== -->
 <section class="lesson" id="lesson3">
 
-<!-- 3.1 The Chart -->
-<div class="card">
+<!-- 3.1 Chart -->
+<div class="card reveal">
   <div class="card-icon">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
   </div>
   <button class="tts-btn" onclick="speakSection(this, 'section3_1')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
@@ -743,227 +864,265 @@ body {
   </button>
   <h2>一、星盘：天空的快照</h2>
   <div id="section3_1">
-  <p>星盘（Astrological Chart / Horoscope）是<strong>某一特定时刻、特定地点</strong>的天空二维映射。它捕捉了从地球视角看到的太阳、月亮和行星在黄道上的位置，以及关键轴线——地平线（Ascendant/Descendant）和子午线（MC/IC）——的位置。</p>
-
+  <p>星盘是<strong>某一特定时刻、特定地点</strong>的天空二维映射。它捕捉了从地球视角看到的太阳、月亮和行星在黄道上的位置，以及关键轴线——地平线（Asc/DC）和子午线（MC/IC）。</p>
   <div class="highlight">
-    <strong>"Horoscope"的词源：</strong>这个词来自希腊语 <em>hōroskopos</em>，直译为<strong>"小时的观察者"</strong>，特指上升点（Ascendant）——出生时刻东方地平线上正在升起的星座度数。在现代，这个词的含义已扩展为指代<strong>整个星盘</strong>。
+    <strong>"Horoscope"词源：</strong>来自希腊语<em>hōroskopos</em>，直译为<strong>"小时的观察者"</strong>，特指上升点——出生时刻东方地平线上正在升起的星座度数。在现代，这个词的含义已扩展为指代整个星盘。
   </div>
+  <p>星盘使用<strong>两套坐标系统</strong>：黄道坐标（十二星座的360°环）测量行星经度；地面坐标（十二宫位）将行星与地面位置关联。你可以将星盘理解为一张<strong>"天空的快照"</strong>——在某个瞬间，宇宙的样貌被永久记录下来。</p>
 
-  <p>星盘使用<strong>两套坐标系统</strong>来标记行星位置：</p>
-  <ul>
-    <li><strong>黄道坐标（Zodiacal Coordinates）：</strong>由黄道十二宫（星座）组成——测量行星在黄道带360°环上的经度位置。</li>
-    <li><strong>地面坐标（Terrestrial Coordinates）：</strong>由十二个宫位组成——从地平线和子午线投射出的天空分区，将行星的位置与地球上的特定地点关联起来。</li>
-  </ul>
-
-  <!-- SVG: Chart Diagram -->
+  <!-- Chart SVG Diagram -->
   <svg class="svg-diagram" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-    <text x="200" y="24" text-anchor="middle" class="title">星盘基本结构</text>
-    <!-- Outer circle (zodiac) -->
-    <circle cx="200" cy="210" r="170" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
-    <circle cx="200" cy="210" r="150" fill="none" stroke="#9b7530" stroke-width="1" opacity="0.5"/>
-    <!-- Inner circle -->
-    <circle cx="200" cy="210" r="80" fill="none" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
-    <!-- Horizon line -->
-    <line x1="30" y1="210" x2="370" y2="210" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="6,3"/>
-    <!-- Meridian line -->
-    <line x1="200" y1="40" x2="200" y2="380" stroke="#2471a3" stroke-width="1.5" stroke-dasharray="6,3"/>
-    <!-- Labels -->
-    <text x="380" y="214" font-size="11" fill="#c0392b" font-weight="700">Asc</text>
-    <text x="12" y="214" font-size="11" fill="#c0392b">DC</text>
-    <text x="204" y="42" font-size="11" fill="#2471a3" font-weight="700">MC</text>
-    <text x="204" y="392" font-size="11" fill="#2471a3">IC</text>
-    <!-- Annotation lines -->
-    <text x="310" y="130" font-size="10" fill="var(--text-muted)">黄道带</text>
-    <text x="310" y="145" font-size="10" fill="var(--text-muted)">(Zodiac)</text>
-    <line x1="300" y1="148" x2="270" y2="170" stroke="var(--text-muted)" stroke-width="0.5"/>
-    <text x="260" y="302" font-size="10" fill="var(--text-muted)">宫位</text>
-    <text x="258" y="317" font-size="10" fill="var(--text-muted)">(Houses)</text>
-    <line x1="268" y1="300" x2="250" y2="280" stroke="var(--text-muted)" stroke-width="0.5"/>
-    <text x="80" y="150" font-size="10" fill="var(--text-muted)">行星符号</text>
-    <line x1="140" y1="155" x2="160" y2="175" stroke="var(--text-muted)" stroke-width="0.5"/>
-    <!-- Central text -->
-    <text x="200" y="215" text-anchor="middle" font-size="11" fill="#1e3a5f" font-weight="600">地球</text>
+    <text x="200" y="22" text-anchor="middle" font-family="var(--font-display)" font-size="13" fill="var(--navy)" font-weight="700">星盘基本结构</text>
+    <circle cx="200" cy="210" r="170" fill="none" stroke="var(--navy)" stroke-width="1.3"/>
+    <circle cx="200" cy="210" r="150" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.5"/>
+    <circle cx="200" cy="210" r="75" fill="none" stroke="var(--navy)" stroke-width="0.8" opacity="0.3"/>
+    <line x1="30" y1="210" x2="370" y2="210" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="8,4"/>
+    <line x1="200" y1="40" x2="200" y2="380" stroke="#2471a3" stroke-width="1.2" stroke-dasharray="8,4"/>
+    <text x="378" y="214" font-size="10" fill="#c0392b" font-weight="700">Asc</text>
+    <text x="10" y="214" font-size="10" fill="#c0392b">DC</text>
+    <text x="203" y="42" font-size="10" fill="#2471a3" font-weight="700">MC</text>
+    <text x="203" y="394" font-size="10" fill="#2471a3">IC</text>
+    <text x="310" y="126" font-size="9" fill="var(--text-muted)">黄道带</text>
+    <line x1="295" y1="132" x2="265" y2="155" stroke="var(--text-muted)" stroke-width="0.5"/>
+    <text x="258" y="302" font-size="9" fill="var(--text-muted)">宫位</text>
+    <line x1="263" y1="300" x2="248" y2="278" stroke="var(--text-muted)" stroke-width="0.5"/>
+    <circle cx="200" cy="210" r="4" fill="var(--navy)"/>
+    <text x="200" y="234" text-anchor="middle" font-size="9" fill="var(--navy)" font-weight="600">地球</text>
   </svg>
   </div>
 </div>
 
-<!-- 3.2 History of the Horoscope -->
-<div class="card">
+<!-- 3.2 Chart History Gallery -->
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section3_2')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
   <h2>二、星盘的历史演变</h2>
-  <p style="color:var(--text-muted);">星盘的表现形式随文明演进而不断变化。点击每个时代了解详情：</p>
+  <p style="color:var(--text-muted);">星盘的表现形式随文明演进而变化。点击每个时代浏览：</p>
   <div class="gallery-row" id="chartGallery">
-    <div class="gallery-item selected" data-era="egyptian" onclick="showEra(this)">
-      <div class="gi-icon" style="background:#f5ead0;">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#9b7530" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      </div>
-      <div class="gi-name">古埃及</div>
-      <div class="gi-date">约前2000年</div>
-    </div>
-    <div class="gallery-item" data-era="greek" onclick="showEra(this)">
-      <div class="gi-icon" style="background:#e8e4f0;">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#6c5ce7" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
-      </div>
-      <div class="gi-name">希腊化</div>
-      <div class="gi-date">约前200年</div>
-    </div>
-    <div class="gallery-item" data-era="medieval" onclick="showEra(this)">
-      <div class="gi-icon" style="background:#f0e8d8;">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#8b6914" stroke-width="1.5"><rect x="3" y="3" width="18" height="18"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
-      </div>
-      <div class="gi-name">中世纪</div>
-      <div class="gi-date">约1200年</div>
-    </div>
-    <div class="gallery-item" data-era="renaissance" onclick="showEra(this)">
-      <div class="gi-icon" style="background:#f5e8e0;">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><rect x="7" y="7" width="10" height="10"/></svg>
-      </div>
-      <div class="gi-name">文艺复兴</div>
-      <div class="gi-date">约1600年</div>
-    </div>
-    <div class="gallery-item" data-era="modern" onclick="showEra(this)">
-      <div class="gi-icon" style="background:#e0e8f5;">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
-      </div>
-      <div class="gi-name">现代</div>
-      <div class="gi-date">20世纪至今</div>
-    </div>
+    <div class="gallery-item selected" data-era="egyptian" onclick="showEra(this)"><div class="gi-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9b7530" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div class="gi-name">古埃及</div><div class="gi-date">约前2000年</div></div>
+    <div class="gallery-item" data-era="greek" onclick="showEra(this)"><div class="gi-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6c5ce7" stroke-width="1.5"><circle cx="12" cy="12" r="10"/></svg></div><div class="gi-name">希腊化</div><div class="gi-date">约前200年</div></div>
+    <div class="gallery-item" data-era="medieval" onclick="showEra(this)"><div class="gi-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8b6914" stroke-width="1.5"><rect x="3" y="3" width="18" height="18"/></svg></div><div class="gi-name">中世纪</div><div class="gi-date">约1200年</div></div>
+    <div class="gallery-item" data-era="renaissance" onclick="showEra(this)"><div class="gi-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><rect x="7" y="7" width="10" height="10"/></svg></div><div class="gi-name">文艺复兴</div><div class="gi-date">约1600年</div></div>
+    <div class="gallery-item" data-era="modern" onclick="showEra(this)"><div class="gi-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div><div class="gi-name">现代</div><div class="gi-date">20世纪—</div></div>
   </div>
   <div class="gallery-detail" id="eraDetail"></div>
 </div>
 
+<!-- Constellation Builder Game -->
+<div class="card reveal">
+  <button class="tts-btn" onclick="speakSection(this, 'section3_game')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    朗读本节
+  </button>
+  <h2>游戏：星座连线</h2>
+  <p style="color:var(--text-muted);">按顺序点击星点，连出星座图案！全部正确连线可获得 <strong>30 XP</strong></p>
+  <div class="const-game" id="constGame">
+    <!-- Stars placed with JS -->
+  </div>
+  <p class="const-hint" id="constHint">点击编号最小的未点亮星星开始连线</p>
+  <p class="const-success" id="constSuccess">&#9733; 星座完成！+30 XP</p>
+</div>
+
 <!-- 3.3 Chart Components -->
-<div class="card">
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section3_3')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
   <h2>三、星盘的核心构成要素</h2>
   <div id="section3_3">
-
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin:16px 0;">
-
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <h4 style="color:var(--navy);">黄道带 · The Zodiac</h4>
-      <p style="font-size:0.93rem;">星盘最外圈的360°环，被划分为十二个30°的星座区域。这是测量行星经度位置的"刻度尺"。黄道带是太阳在一年中相对于恒星背景"经过"的路径。</p>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:14px; margin:14px 0;">
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">黄道带 The Zodiac</h4><p style="font-size:0.9rem;">外圈360°环，分为12个30°星座区域。测量行星经度的"刻度尺"，太阳在一年中经过的路径。</p>
     </div>
-
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <h4 style="color:var(--navy);">十二宫位 · The Houses</h4>
-      <p style="font-size:0.93rem;">从地平线和子午线投射出的十二个天空分区，代表<strong>生活的不同领域</strong>（自我、财富、兄弟、家庭、子女、健康、婚姻、死亡、旅行、事业、朋友、隐秘）。宫位将行星的能量"落地"到具体的人生事务中。</p>
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">十二宫位 Houses</h4><p style="font-size:0.9rem;">从地平线和子午线投射的12个分区，代表生活领域——自我、财富、家庭、子女、婚姻、事业等。</p>
     </div>
-
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <h4 style="color:var(--navy);">行星 · The Planets</h4>
-      <p style="font-size:0.93rem;">七颗传统行星（日月水金火木土）以符号标记在星盘中对应的星座和宫位位置。行星代表<strong>行动者</strong>和<strong>动力</strong>——每种能量都以其行星的"性格"来表达。</p>
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">行星 Planets</h4><p style="font-size:0.9rem;">七颗传统行星以符号标记在对应位置。行星代表<strong>行动者</strong>——每种能量以行星的"性格"表达。</p>
     </div>
-
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <h4 style="color:var(--navy);">四轴点 · The Angles</h4>
-      <p style="font-size:0.93rem;"><strong>Asc（上升点）</strong>：东方地平线与黄道的交点——出生时刻升起的星座。星盘中<strong>最个人化</strong>的点。<br>
-      <strong>DC（下降点）</strong>：正对的西方点，关系与伴侣。<br>
-      <strong>MC（中天）</strong>：最高点，事业与公众形象。<br>
-      <strong>IC（天底）</strong>：最低点，根源与家庭。</p>
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">四轴点 Angles</h4><p style="font-size:0.9rem;">Asc（上升）东方升起星座；DC（下降）关系；MC（中天）事业形象；IC（天底）根源家庭。</p>
     </div>
-
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <h4 style="color:var(--navy);">相位 · The Aspects</h4>
-      <p style="font-size:0.93rem;">行星之间的角度关系（合0°、冲180°、三合120°、刑90°、六合60°）。相位描述了<strong>行星能量之间的对话</strong>——和谐或冲突、合作或对抗。在星盘上以彩色线条连接。</p>
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">相位 Aspects</h4><p style="font-size:0.9rem;">行星间的角度关系——合0°、冲180°、三合120°、刑90°、六合60°。描述行星能量之间的<strong>对话</strong>。</p>
     </div>
-
-    <div style="padding:20px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
-      <h4 style="color:var(--navy);">月交点 · The Nodes</h4>
-      <p style="font-size:0.93rem;">月亮轨道与黄道相交的两个虚点——北交点（☊）和南交点（☋）。在传统占星中，北交点与<strong>增益和扩张</strong>相关，南交点与<strong>减损和收缩</strong>相关。日月食发生在交点附近。</p>
+    <div style="padding:18px; border-radius:var(--radius-md); border:1px solid var(--border); background:#fff;">
+      <h4 style="color:var(--navy);">月交点 Nodes</h4><p style="font-size:0.9rem;">月亮轨道与黄道交点——北交☊（增益扩张）和南交☋（减损收缩）。日月食发生在交点附近。</p>
     </div>
-
   </div>
   </div>
 </div>
 
 <!-- 3.4 Square vs Circular -->
-<div class="card">
+<div class="card reveal">
   <button class="tts-btn" onclick="speakSection(this, 'section3_4')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
     朗读本节
   </button>
   <h2>四、方盘与圆盘</h2>
   <div id="section3_4">
-  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
-    <div style="padding:24px; border-radius:var(--radius-md); border:2px solid var(--border); background:#fff; text-align:center;">
-      <svg width="70" height="70" viewBox="0 0 100 100" style="margin-bottom:8px;">
-        <rect x="10" y="10" width="80" height="80" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
-        <line x1="10" y1="50" x2="90" y2="50" stroke="#9b7530" stroke-width="0.8"/>
-        <line x1="50" y1="10" x2="50" y2="90" stroke="#9b7530" stroke-width="0.8"/>
-        <line x1="10" y1="30" x2="90" y2="30" stroke="#ccc" stroke-width="0.5"/>
-        <line x1="10" y1="70" x2="90" y2="70" stroke="#ccc" stroke-width="0.5"/>
-        <line x1="30" y1="10" x2="30" y2="90" stroke="#ccc" stroke-width="0.5"/>
-        <line x1="70" y1="10" x2="70" y2="90" stroke="#ccc" stroke-width="0.5"/>
-        <text x="20" y="25" font-size="7" fill="var(--text-muted)">I</text>
-        <text x="60" y="25" font-size="7" fill="var(--text-muted)">II</text>
-      </svg>
-      <h4 style="color:var(--navy);">方形星盘</h4>
-      <p style="font-size:0.9rem;color:var(--text-muted);">中世纪传统形式。12个方格各代表一个宫位，三角形标记表示星座。便于记录和计算行星位置，是传统占星师的首选工作格式。</p>
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+    <div style="padding:22px; border-radius:var(--radius-md); border:2px solid var(--border); background:#fff; text-align:center;">
+      <svg width="70" height="70" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" fill="none" stroke="var(--navy)" stroke-width="1.3"/><line x1="10" y1="50" x2="90" y2="50" stroke="var(--gold)" stroke-width="0.7"/><line x1="50" y1="10" x2="50" y2="90" stroke="var(--gold)" stroke-width="0.7"/></svg>
+      <h4 style="color:var(--navy);margin-top:8px;">方形星盘</h4>
+      <p style="font-size:0.86rem;color:var(--text-muted);">中世纪传统形式。12格=12宫，三角形标记星座。便于记录和计算。</p>
     </div>
-    <div style="padding:24px; border-radius:var(--radius-md); border:2px solid var(--border); background:#fff; text-align:center;">
-      <svg width="70" height="70" viewBox="0 0 100 100" style="margin-bottom:8px;">
-        <circle cx="50" cy="50" r="40" fill="none" stroke="#1e3a5f" stroke-width="1.5"/>
-        <circle cx="50" cy="50" r="28" fill="none" stroke="#9b7530" stroke-width="0.8"/>
-        <line x1="10" y1="50" x2="90" y2="50" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="4,2"/>
-        <line x1="50" y1="10" x2="50" y2="90" stroke="#2471a3" stroke-width="0.8" stroke-dasharray="4,2"/>
-        <line x1="22" y1="22" x2="78" y2="78" stroke="#ccc" stroke-width="0.4"/>
-        <line x1="78" y1="22" x2="22" y2="78" stroke="#ccc" stroke-width="0.4"/>
-        <circle cx="50" cy="50" r="3" fill="#1e3a5f"/>
-      </svg>
-      <h4 style="color:var(--navy);">圆形星盘</h4>
-      <p style="font-size:0.9rem;color:var(--text-muted);">现代主流形式。直观反映天空的圆形，360°环直接对应黄道，便于展示相位关系和行星分布模式。</p>
+    <div style="padding:22px; border-radius:var(--radius-md); border:2px solid var(--border); background:#fff; text-align:center;">
+      <svg width="70" height="70" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="var(--navy)" stroke-width="1.3"/><circle cx="50" cy="50" r="25" fill="none" stroke="var(--gold)" stroke-width="0.7"/><line x1="10" y1="50" x2="90" y2="50" stroke="#c0392b" stroke-width="0.7" stroke-dasharray="5,3"/><line x1="50" y1="10" x2="50" y2="90" stroke="#2471a3" stroke-width="0.7" stroke-dasharray="5,3"/></svg>
+      <h4 style="color:var(--navy);margin-top:8px;">圆形星盘</h4>
+      <p style="font-size:0.86rem;color:var(--text-muted);">现代主流形式。直观反映天空圆形，便于展示相位。</p>
     </div>
   </div>
-  <p style="margin-top:16px;">传统占星师通常<strong>两种形式都用</strong>——方形便于计算和记录，圆形便于展示和解读。本书在附录7中提供了详细的星盘计算教程，包括两种形式的完整计算示例。</p>
+  <p style="margin-top:14px;">传统占星师通常<strong>两种形式都用</strong>——方形便于计算和记录，圆形便于展示和解读。本书附录7提供了完整的手工星盘计算教程（含两种形式的完整示例）。</p>
   </div>
 </div>
 
-<!-- Lesson 3 Quiz -->
-<div class="quiz-card" id="quiz3">
-  <h3>第三讲 · 知识检测</h3>
-  <p style="color:var(--text-muted);margin-bottom:16px;">完成以下题目以检验学习成果（共4题）</p>
+<!-- Image ref -->
+<div class="img-ref reveal">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+  <span>参考：<a href="https://www.sciencephoto.com/media/364095/view" target="_blank">托勒密世界体系图解(1893)</a> · <a href="https://commons.wikimedia.org/wiki/File:Cellarius_ptolemaic_system_c2.jpg" target="_blank">Cellarius天球版画(1660)</a></span>
+</div>
+
+<!-- Quiz 3 -->
+<div class="quiz-card reveal" id="quiz3">
+  <h3>第三讲 · 知识检测 <span style="font-size:0.8rem;color:var(--text-muted);">(每题 25 XP)</span></h3>
+  <p style="color:var(--text-muted);margin-bottom:14px;">完成以下4题检验学习成果</p>
   <div id="quiz3Content"></div>
 </div>
 
 </section>
 
-<!-- NEXT LESSON BUTTON -->
-<div style="text-align:center; padding: 44px 0 60px;">
-  <button class="btn btn-primary" id="nextBtn" onclick="nextLesson()" style="font-size:1.05rem; padding: 14px 36px;">
+<!-- NEXT LESSON -->
+<div style="text-align:center; padding: 40px 0 60px;" class="reveal">
+  <button class="btn btn-primary" id="nextBtn" onclick="nextLesson()" style="font-size:1.02rem; padding: 14px 36px;">
     进入下一讲 →
   </button>
 </div>
 
 </div><!-- /page-container -->
 
+
+<!-- ================================================================
+     JAVASCRIPT
+     ================================================================ -->
 <script>
 // ============================================================
-// STATE MANAGEMENT
+// STATE
 // ============================================================
-const STATE_KEY = 'heavenlySpheres_v2';
-let state = { lesson: 1, lessonsDone: {}, quizData: {} };
+const KEY = 'heavenlySpheres_v3';
+let S = { lesson: 1, done: {}, quiz: {}, xp: 0, ach: {}, constDone: false };
 
-try {
-  const saved = JSON.parse(localStorage.getItem(STATE_KEY));
-  if (saved) state = Object.assign(state, saved);
-} catch(e) {}
+try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) S = Object.assign(S, s); } catch(e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
 
-function save() {
-  try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch(e) {}
+// ============================================================
+// XP / Achievements
+// ============================================================
+const ACHIEVEMENTS = [
+  { id: 'firstClick', name: '初次探索', desc: '与任意互动元素交互', icon: '🔍', xp: 0, cond: () => true },
+  { id: 'firstQuiz', name: '初学者', desc: '完成任意一讲的测验', icon: '📝', xp: 0, cond: () => Object.values(S.done).some(v=>v) },
+  { id: 'allDone', name: '学有所成', desc: '完成全部三讲课程', icon: '🎓', xp: 0, cond: () => Object.keys(S.done).length >= 3 },
+  { id: 'perfect', name: '满分学霸', desc: '任意一讲测验全对', icon: '💯', xp: 0, cond: () => Object.values(S.quiz).some(q => q.score >= 4) },
+  { id: 'constellation', name: '星座大师', desc: '完成星座连线游戏', icon: '⭐', xp: 0, cond: () => S.constDone },
+  { id: 'xp100', name: '知识猎手', desc: '累计获得 100 XP', icon: '🏅', xp: 0, cond: () => S.xp >= 100 },
+  { id: 'xp200', name: '占星学者', desc: '累计获得 200 XP', icon: '🏆', xp: 0, cond: () => S.xp >= 200 },
+];
+
+function addXp(amount) {
+  S.xp += amount;
+  document.getElementById('xpCount').textContent = S.xp;
+  checkAchievements();
+  save();
+  // Animate XP badge
+  const badge = document.getElementById('xpFloat');
+  badge.style.transform = 'scale(1.1)';
+  setTimeout(() => badge.style.transform = '', 200);
 }
+
+function checkAchievements() {
+  let earned = false;
+  ACHIEVEMENTS.forEach(a => {
+    if (!S.ach[a.id] && a.cond()) {
+      S.ach[a.id] = true;
+      earned = true;
+      if (a.icon) showToast(a.icon + ' 成就解锁：' + a.name);
+    }
+  });
+  if (earned) { save(); renderAchievements(); }
+  document.getElementById('xpCount').textContent = S.xp;
+}
+
+function renderAchievements() {
+  const container = document.getElementById('xpAchievements');
+  container.innerHTML = ACHIEVEMENTS.map(a =>
+    `<div class="ach-row ${S.ach[a.id] ? 'earned' : 'locked'}">
+      <span>${S.ach[a.id] ? a.icon : '🔒'}</span>
+      <span>${a.name}</span><span style="font-size:0.75rem;margin-left:auto;">${a.desc}</span>
+    </div>`
+  ).join('');
+}
+
+function toggleXpPopup() {
+  const popup = document.getElementById('xpPopup');
+  popup.classList.toggle('show');
+  renderAchievements();
+}
+
+// Click outside to close XP popup
+document.addEventListener('click', (e) => {
+  const popup = document.getElementById('xpPopup');
+  const float = document.getElementById('xpFloat');
+  if (popup.classList.contains('show') && !popup.contains(e.target) && !float.contains(e.target)) {
+    popup.classList.remove('show');
+  }
+});
+
+// ============================================================
+// SMART STICKY NAV — hide on scroll down, show on scroll up
+// ============================================================
+let lastScrollY = 0;
+let navHidden = false;
+const navBar = document.getElementById('courseNav');
+
+function handleScroll() {
+  const scrollY = window.scrollY;
+  if (scrollY < 60) {
+    navBar.classList.remove('hidden');
+    navHidden = false;
+  } else if (scrollY > lastScrollY + 8 && !navHidden) {
+    navBar.classList.add('hidden');
+    navHidden = true;
+  } else if (scrollY < lastScrollY - 8 && navHidden) {
+    navBar.classList.remove('hidden');
+    navHidden = false;
+  }
+  lastScrollY = scrollY;
+}
+
+window.addEventListener('scroll', handleScroll, { passive: true });
+
+// ============================================================
+// SCROLL REVEAL
+// ============================================================
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ============================================================
 // NAVIGATION
 // ============================================================
 function goLesson(n) {
-  state.lesson = n;
+  S.lesson = n; save();
   document.querySelectorAll('.lesson').forEach(s => s.classList.remove('active'));
   document.getElementById('lesson' + n).classList.add('active');
   document.querySelectorAll('.nav-pill').forEach(b => {
@@ -971,38 +1130,40 @@ function goLesson(n) {
     if (parseInt(b.dataset.lesson) === n) b.classList.add('active');
   });
   const btn = document.getElementById('nextBtn');
-  if (n >= 3) { btn.textContent = '已完成全部课程'; btn.onclick = () => goLesson(1); }
-  else { btn.textContent = '进入下一讲 →'; btn.onclick = nextLesson; }
+  btn.textContent = n >= 3 ? '已完成全部课程' : '进入下一讲 →';
+  btn.onclick = n >= 3 ? (() => goLesson(1)) : nextLesson;
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Re-observe newly visible elements
+  setTimeout(() => {
+    document.querySelectorAll('#lesson' + n + ' .reveal:not(.visible)').forEach(el => revealObserver.observe(el));
+  }, 100);
 }
 
 document.getElementById('courseNav').addEventListener('click', e => {
   const pill = e.target.closest('.nav-pill');
-  if (pill) goLesson(parseInt(pill.dataset.lesson));
+  if (pill) { addXp(2); goLesson(parseInt(pill.dataset.lesson)); }
 });
 
-function nextLesson() {
-  if (state.lesson < 3) goLesson(state.lesson + 1);
-}
+function nextLesson() { if (S.lesson < 3) goLesson(S.lesson + 1); }
 
 function updateProgress() {
-  const done = Object.keys(state.lessonsDone).length;
+  const done = Object.keys(S.done).length;
   const pct = Math.round((done / 3) * 100);
   document.getElementById('progressLabel').textContent = pct + '%';
   document.getElementById('progressBar').style.width = pct + '%';
   document.querySelectorAll('.nav-pill').forEach(p => {
-    if (state.lessonsDone[parseInt(p.dataset.lesson)]) p.classList.add('completed');
-    else p.classList.remove('completed');
+    p.classList.toggle('completed', !!S.done[parseInt(p.dataset.lesson)]);
   });
 }
 
 function completeLesson(n) {
-  if (state.lessonsDone[n]) return;
-  state.lessonsDone[n] = true;
-  save();
-  updateProgress();
-  showToast('本讲课程完成！知识进度已保存。');
+  if (S.done[n]) return;
+  S.done[n] = true; save(); updateProgress();
+  addXp(20);
+  showToast('第' + n + '讲课程完成！+20 XP');
+  checkAchievements();
 }
 
 function showToast(msg) {
@@ -1013,9 +1174,11 @@ function showToast(msg) {
 }
 
 // ============================================================
-// TTS — Web Speech API
+// TTS — natural voice with sentence-by-sentence reading
 // ============================================================
-let currentUtterance = null;
+let ttsQueue = [];
+let ttsActive = false;
+let ttsCurrentBtn = null;
 
 function speakSection(btn, sectionId) {
   const el = document.getElementById(sectionId);
@@ -1024,40 +1187,77 @@ function speakSection(btn, sectionId) {
   // If already playing, stop
   if (btn.classList.contains('playing')) {
     window.speechSynthesis.cancel();
+    ttsQueue = []; ttsActive = false;
     btn.classList.remove('playing');
+    ttsCurrentBtn = null;
     return;
   }
 
-  // Cancel any existing speech
+  // Stop any existing
   window.speechSynthesis.cancel();
   document.querySelectorAll('.tts-btn.playing').forEach(b => b.classList.remove('playing'));
+  ttsQueue = []; ttsActive = false;
 
   const text = el.textContent.trim();
   if (!text) return;
 
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'zh-CN';
-  utterance.rate = 0.88;
-  utterance.pitch = 1.0;
+  // Split into sentences for more natural pacing
+  const sentences = text.split(/(?<=[。！？.！？\n])/g).filter(s => s.trim().length > 1);
 
-  // Try to find a good Chinese voice
+  // Get available voices
   const voices = window.speechSynthesis.getVoices();
-  const zhVoice = voices.find(v => v.lang.startsWith('zh-CN')) ||
-                  voices.find(v => v.lang.startsWith('zh-TW')) ||
+  // Pick best Chinese voice
+  const zhVoice = voices.find(v => v.name.includes('Tingting') || v.name.includes('Yaoyao')) ||
+                  voices.find(v => v.lang.startsWith('zh-CN') && v.localService) ||
+                  voices.find(v => v.lang.startsWith('zh-CN')) ||
+                  voices.find(v => v.lang.startsWith('zh-TW') && v.localService) ||
                   voices.find(v => v.lang.startsWith('zh'));
-  if (zhVoice) utterance.voice = zhVoice;
 
-  utterance.onstart = () => btn.classList.add('playing');
-  utterance.onend = () => btn.classList.remove('playing');
-  utterance.onerror = () => btn.classList.remove('playing');
-
+  ttsQueue = sentences;
+  ttsActive = true;
+  ttsCurrentBtn = btn;
   btn.classList.add('playing');
+
+  speakNext(zhVoice, btn);
+}
+
+function speakNext(voice, btn) {
+  if (!ttsActive || ttsQueue.length === 0) {
+    if (btn) btn.classList.remove('playing');
+    ttsCurrentBtn = null;
+    ttsActive = false;
+    return;
+  }
+
+  const sentence = ttsQueue.shift();
+  const utterance = new SpeechSynthesisUtterance(sentence);
+  utterance.lang = 'zh-CN';
+  utterance.rate = 0.9;
+  utterance.pitch = 1.05;
+  if (voice) utterance.voice = voice;
+
+  utterance.onend = () => {
+    // Small natural pause between sentences
+    setTimeout(() => speakNext(voice, btn), 80);
+  };
+  utterance.onerror = (e) => {
+    if (e.error !== 'canceled' && e.error !== 'interrupted') {
+      setTimeout(() => speakNext(voice, btn), 80);
+    } else {
+      if (btn) btn.classList.remove('playing');
+      ttsCurrentBtn = null;
+      ttsActive = false;
+    }
+  };
+
   window.speechSynthesis.speak(utterance);
-  currentUtterance = utterance;
 }
 
 // Preload voices
-window.speechSynthesis.onvoiceschanged = () => {};
+if (window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+}
 
 // ============================================================
 // TIMELINE
@@ -1065,23 +1265,23 @@ window.speechSynthesis.onvoiceschanged = () => {};
 function toggleTL(item) {
   const was = item.classList.contains('open');
   document.querySelectorAll('#timeline .tl-item').forEach(i => i.classList.remove('open'));
-  if (!was) item.classList.add('open');
+  if (!was) { item.classList.add('open'); addXp(3); }
 }
 
 // ============================================================
 // SPHERES
 // ============================================================
 const sphereInfo = {
-  primum: '<strong>原动天 Primum Mobile</strong>（"第一运动者"）——最外层球体，驱动所有内层球体的旋转运动。在中世纪宇宙学中，它是物质世界与神圣领域之间的边界。它自身不包含任何可见天体，却是整个系统运动的最终来源。',
-  firmament: '<strong>恒星天 Firmament</strong>——所有固定恒星和黄道星座的所在。在古代模型中，所有恒星被固定在同一球层上共同旋转。这就是我们仰望夜空时看到的"天穹"本体。它携带了整个黄道带。',
-  saturn: '<strong>土星天</strong>——行星球层中最远的，"第七重天"。土星是肉眼可见的最慢行星（约29.5年一周），因此被赋予了时间、限制、智慧和边界的象征意义。它是"古老的守护者"。',
-  jupiter: '<strong>木星天</strong>——第二远。木星是天空中第二亮的行星（仅次于金星），约12年运行一周。象征扩张、幸运、智慧和正义。传统上被称为"大吉星"。',
-  mars: '<strong>火星天</strong>——红色的星球，约2年运行一周。在球层序列中位于太阳之下，代表力量、勇气、冲突和行动。传统上被称为"小凶星"。',
-  sun: '<strong>太阳天</strong>——占据球层序列的正中位置：土、木、火在上，金、水、月在下。光是生命和意识的源头，象征自我、权威和创造力。在占星学中是"发光体"之一，具有至高的重要性。',
-  venus: '<strong>金星天</strong>——位于太阳之下。夜空除月亮外最亮的行星。轨道始终靠近太阳（不超过48°）。代表爱、美、和谐与艺术。传统上被称为"小吉星"。',
-  mercury: '<strong>水星天</strong>——离地球最近的球层之一。运行最快（约88天一周），永远在太阳28°以内。代表思维、交流、贸易和旅行。在性质上中性，随所接触的行星而变化。',
-  moon: '<strong>月亮天</strong>——所有天体球层中离地球最近的。变化最快（约28天一周），象征情绪、身体、习惯和日常生活。作为太阳光的"镜子"和传递者，它接收和反射所有行星的影响。',
-  elements: '<strong>元素界（月下世界）</strong>——月亮球层之下的区域，包含地球和围绕它的四元素球层。从外向内依次为：火（大气上层、极光、流星）→ 气（大气层）→ 水（海洋）→ 土（大陆）。这是变化、生灭和物质转化的领域。'
+  primum: '<strong>原动天 Primum Mobile</strong>——最外层球体，"第一推动者"。驱动所有内层球体的旋转。无可见天体，却是整个系统运动的最终来源。物质世界与神圣领域的边界。',
+  firmament: '<strong>恒星天 Firmament</strong>——所有固定恒星和黄道星座所在。古代模型认为所有恒星固定于同一球层共同旋转。我们仰望夜空时看到的"天穹"本体。',
+  saturn: '<strong>土星天</strong>——行星球层中最远的，"第七重天"。最慢肉眼可见行星（约29.5年一周）。象征时间、限制、智慧和边界。传统上被称为"大凶星"。',
+  jupiter: '<strong>木星天</strong>——第二远。约12年运行一周。天空第二亮行星。象征扩张、幸运、智慧、正义。传统"大吉星"。',
+  mars: '<strong>火星天</strong>——红色星球，约2年一周。位于太阳之下，代表力量、勇气、冲突和行动。传统"小凶星"。',
+  sun: '<strong>太阳天</strong>——占据序列正中：土、木、火在上，金、水、月在下。光、生命和意识的源头。占星学"发光体"之一，至高重要。',
+  venus: '<strong>金星天</strong>——夜空最亮行星（月除外）。轨道始终靠近太阳（不过48°）。代表爱、美、和谐与艺术。传统"小吉星"。',
+  mercury: '<strong>水星天</strong>——运行最快（约88天一周），永远在太阳28°以内。代表思维、交流、贸易。中性，随接触的行星而变化。',
+  moon: '<strong>月亮天</strong>——离地球最近的天体球层。变化最快（约28天一周）。象征情绪、身体、习惯。太阳光的"镜子"和传递者，接收并反射所有行星影响。',
+  elements: '<strong>元素界（月下世界）</strong>——月亮之下，包含四元素球层。由外向内：火（大气上层、极光、流星）→ 气（大气层）→ 水（海洋）→ 土（大陆）。变化、生灭、物质转化之域。'
 };
 
 function showSphere(el) {
@@ -1089,28 +1289,146 @@ function showSphere(el) {
   document.querySelectorAll('#spheresStack .sphere-row').forEach(r => r.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('sphereDetail').innerHTML = sphereInfo[key] || '';
+  addXp(3);
 }
 
 // ============================================================
 // CHART ERA GALLERY
 // ============================================================
 const eraInfo = {
-  egyptian: '<h4>古埃及时期（约前2000年）</h4><p>已知最早的占星盘出现于古埃及，以象形文字和简单几何图形绘制在莎草纸上。最早的星盘服务于世运预测——法老的命运、尼罗河的泛滥。个人本命盘的诞生需要等到希腊化时期上升点概念的发明。</p>',
-  greek: '<h4>希腊化时期（约前200年）</h4><p>约公元前200年，上升点的计算首次出现——这一创新使宫位的精确计算成为可能。希腊人将占星学彻底个人化，第一张完整的个人本命盘诞生于此时期。托勒密的《四书》为星盘绘制和解读制定了标准框架，影响持续一千五百年。</p>',
-  medieval: '<h4>中世纪（约1200年）</h4><p>中世纪占星师发明了独特的方形星盘——将天空划分为12个等大的方格，每格为一个宫位，三角形标记表示星座。这种形式虽不如圆形直观，但极便于记录和计算。阿拉伯学者还添加了大量的辅助线和注释系统。</p>',
-  renaissance: '<h4>文艺复兴（约1600年）</h4><p>文艺复兴时期的星盘融合了艺术与科学——精美的装饰边框、华丽的字体、复杂的几何图案。印刷术的普及使星盘形式开始标准化。威廉·利利的方形星盘模板被广泛复制，至今仍被传统占星师使用。</p>',
-  modern: '<h4>现代（20世纪至今）</h4><p>现代星盘以圆形为主流，由计算机精确计算生成。外圈为黄道带360°环，内圈显示十二宫位，行星以符号标记在对应位置，相位以彩色线条连接。软件可瞬间生成任何时间地点的星盘——极大降低了计算门槛，但也使许多学生忽略了计算原理的学习。</p>'
+  egyptian: '<h4>古埃及时期（约前2000年）</h4><p>最早的占星盘以象形文字和简单几何图形绘于莎草纸。主要服务于世运预测——法老命运、尼罗河泛滥。个人本命盘需待希腊化时期上升点概念的发明。</p>',
+  greek: '<h4>希腊化时期（约前200年）</h4><p>约前200年，上升点计算首次出现——宫位精确计算由此成为可能。个人本命盘诞生。托勒密《四书》为星盘绘制和解读制定标准框架，影响持续一千五百年。</p>',
+  medieval: '<h4>中世纪（约1200年）</h4><p>中世纪占星师发明独特的方形星盘——12格=12宫，三角形标记表示星座。虽不如圆形直观，但极便于记录计算。阿拉伯学者添加大量辅助线和注释系统。</p>',
+  renaissance: '<h4>文艺复兴（约1600年）</h4><p>星盘融合艺术与科学——精美装饰边框、华丽字体、复杂几何图案。印刷术普及使星盘形式开始标准化。威廉·利利的方形星盘模板至今仍被传统占星师使用。</p>',
+  modern: '<h4>现代（20世纪至今）</h4><p>圆形为主流，计算机精确生成。外圈黄道带360°，内圈十二宫位，行星符号标记位置，彩色相位线连接。软件瞬间生成任何时间地点星盘——极大降低计算门槛。</p>'
 };
 
 function showEra(el) {
   document.querySelectorAll('#chartGallery .gallery-item').forEach(e => e.classList.remove('selected'));
   el.classList.add('selected');
   document.getElementById('eraDetail').innerHTML = eraInfo[el.dataset.era] || '';
+  addXp(3);
 }
+
 // Init era detail
 (function(){
   const sel = document.querySelector('#chartGallery .gallery-item.selected');
   if (sel) document.getElementById('eraDetail').innerHTML = eraInfo[sel.dataset.era] || '';
+})();
+
+// ============================================================
+// CONSTELLATION BUILDER GAME
+// ============================================================
+(function setupConstGame() {
+  const container = document.getElementById('constGame');
+  if (!container) return;
+
+  // Define constellation star positions (percentage-based)
+  const stars = [
+    { id: 0, x: 20, y: 30, label: '1' },
+    { id: 1, x: 50, y: 15, label: '2' },
+    { id: 2, x: 80, y: 28, label: '3' },
+    { id: 3, x: 65, y: 60, label: '4' },
+    { id: 4, x: 85, y: 78, label: '5' },
+    { id: 5, x: 42, y: 72, label: '6' },
+    { id: 6, x: 22, y: 55, label: '7' },
+  ];
+
+  let currentStar = 0;
+  let connected = [];
+
+  // Create elements
+  stars.forEach(s => {
+    const dot = document.createElement('div');
+    dot.className = 'star-dot';
+    dot.style.left = s.x + '%';
+    dot.style.top = s.y + '%';
+    dot.dataset.id = s.id;
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handleStarClick(s.id, dot);
+    });
+    // Touch support
+    dot.addEventListener('touchend', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      handleStarClick(s.id, dot);
+    });
+    container.appendChild(dot);
+
+    // Label
+    const label = document.createElement('div');
+    label.className = 'const-label';
+    label.style.left = (s.x + 2) + '%';
+    label.style.top = (s.y - 3) + '%';
+    label.textContent = s.label;
+    container.appendChild(label);
+  });
+
+  function handleStarClick(id, dot) {
+    if (S.constDone) return;
+
+    if (id === currentStar) {
+      // Correct star clicked
+      dot.classList.add('selected');
+      connected.push(id);
+      currentStar++;
+
+      // Draw line from previous
+      if (connected.length >= 2) {
+        const prevId = connected[connected.length - 2];
+        drawLine(stars[prevId], stars[id]);
+      }
+
+      addXp(3);
+
+      if (currentStar >= stars.length) {
+        // All done
+        S.constDone = true;
+        addXp(30);
+        document.getElementById('constSuccess').style.display = 'block';
+        document.getElementById('constHint').style.display = 'none';
+        save();
+        checkAchievements();
+        showToast('⭐ 星座连线完成！+30 XP');
+      } else {
+        document.getElementById('constHint').textContent = '点击星星 ' + (currentStar + 1) + ' 继续连线';
+      }
+    } else if (id < currentStar) {
+      // Already connected
+      document.getElementById('constHint').textContent = '这颗已经连过了！请点击星星 ' + (currentStar + 1);
+    } else {
+      // Wrong order
+      document.getElementById('constHint').textContent = '不对！请按顺序点击星星 ' + (currentStar + 1);
+      document.getElementById('constHint').style.color = '#c0392b';
+      setTimeout(() => { document.getElementById('constHint').style.color = ''; }, 600);
+    }
+  }
+
+  function drawLine(from, to) {
+    const line = document.createElement('div');
+    line.className = 'conn-line';
+    const dx = (to.x - from.x);
+    const dy = (to.y - from.y);
+    const length = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+    line.style.left = from.x + '%';
+    line.style.top = from.y + '%';
+    line.style.width = length + '%';
+    line.style.transform = 'rotate(' + angle + 'deg)';
+    container.appendChild(line);
+  }
+
+  // Restore if already done
+  if (S.constDone) {
+    for (let i = 0; i < stars.length; i++) {
+      const dot = container.querySelector('.star-dot[data-id="' + i + '"]');
+      if (dot) dot.classList.add('selected');
+      if (i > 0) drawLine(stars[i-1], stars[i]);
+    }
+    document.getElementById('constSuccess').style.display = 'block';
+    document.getElementById('constHint').style.display = 'none';
+  }
 })();
 
 // ============================================================
@@ -1120,44 +1438,44 @@ const quizBank = {
   1: [
     { q: '传统占星学的四大经典分支不包括以下哪一项？',
       opts: ['本命占星 Natal', '卜卦占星 Horary', '心理占星 Psychological', '择日占星 Electional'],
-      ans: 2, expl: '心理占星是现代发展出的流派，不属于传统四大分支。传统四大分支为：本命、卜卦、择日、世运。' },
+      ans: 2, expl: '心理占星是现代流派，不属于传统四大分支。传统四大：本命、卜卦、择日、世运。' },
     { q: '占星学采用什么观测视角？',
-      opts: ['日心视角（太阳在中心）', '地心视角（地球在中心）', '银河系中心视角', '任意视角'],
-      ans: 1, expl: '占星学以地球为观测基点（地心视角）。这不是"科学错误"，而是有意识的选择——占星学研究天体对地球生命的影响，自然以地球为中心。' },
+      opts: ['日心视角（太阳中心）', '地心视角（地球中心）', '银河中心视角', '任意视角'],
+      ans: 1, expl: '占星学以地球为观测基点。这不是"错误"而是有意识的选择——占星学研究天体对地球生命的影响。' },
     { q: '传统占星学在哪个时期由阿拉伯/伊斯兰学者保存并发展？',
       opts: ['希腊化时期', '文艺复兴时期', '中世纪时期', '巴比伦时期'],
-      ans: 2, expl: '中世纪时期，阿拉伯学者将希腊文献翻译成阿拉伯语并加以发展创新。12世纪起又经拉丁语翻译传回欧洲，占星学才得以在西方延续。' },
+      ans: 2, expl: '中世纪时期，阿拉伯学者将希腊文献译为阿拉伯语并加以创新。12世纪起又译回拉丁语传回欧洲。' },
     { q: '"Horoscope"一词的希腊语原意是什么？',
       opts: ['星星的地图', '小时的观察者', '命运的预言', '天体的舞蹈'],
-      ans: 1, expl: 'Horoscope源自希腊语hōroskopos，直译为"小时的观察者"，特指上升点——出生时刻东方地平线上升起的星座度数。' }
+      ans: 1, expl: 'Horoscope源自希腊语hōroskopos，直译"小时的观察者"，特指上升点——出生时刻东方地平线升起的星座度数。' }
   ],
   2: [
-    { q: '火元素是由哪两种"第一性质"组合而成的？',
+    { q: '火元素由哪两种"第一性质"组合而成？',
       opts: ['冷 + 湿', '热 + 干', '热 + 湿', '冷 + 干'],
-      ans: 1, expl: '火 = 热 + 干。热使火向上升腾并辐射，干使其具有转化和消耗的特性。火元素对应胆汁质气质。' },
+      ans: 1, expl: '火 = 热 + 干。热使火向上升腾辐射，干使其具有转化和消耗特性。火对应胆汁质气质。' },
     { q: '在传统天球模型中，哪个天体球层离地球最近？',
       opts: ['太阳天', '土星天', '恒星天', '月亮天'],
-      ans: 3, expl: '月亮天是所有天体球层中离地球最近的，之下就是元素界（月下世界）。月亮变化最快（约28天一周），是太阳光的"镜子"和传递者。' },
-    { q: '"热"和"冷"在占星学中被称为"主动性质"，主要因为它们与什么概念相关？',
+      ans: 3, expl: '月亮天是所有天体球层中离地球最近的，之下即为元素界（月下世界）。月亮约28天运行一周。' },
+    { q: '"热"和"冷"被称为"主动性质"，主要因为它们与什么概念相关？',
       opts: ['形态', '能量', '颜色', '密度'],
-      ans: 1, expl: '热和冷被称为主动性质，因为它们与能量的概念相关——热代表活跃、辐射、扩张；冷代表静止、吸收、收缩。它们为整个系统注入动力。' },
-    { q: '在传统占星中，解读星盘的"第一步"是什么？',
-      opts: ['看上升星座', '判断主导气质', '数行星在哪个宫位', '找太阳的位置'],
-      ans: 1, expl: '传统占星解读的第一步是判断主导气质（Temperament）。气质决定了整个解读的基调和方向——它是"底色"，所有后续解读都在此基础上展开。' }
+      ans: 1, expl: '热和冷与能量相关——热代表活跃、辐射、扩张；冷代表静止、吸收、收缩。它们为整个系统注入动力。' },
+    { q: '传统占星解读的"第一步"是什么？',
+      opts: ['看上升星座', '判断主导气质', '数行星在哪个宫位', '找太阳位置'],
+      ans: 1, expl: '传统占星第一步是判断气质（Temperament）。气质决定整个解读基调——是"底色"，所有后续解读的基础。' }
   ],
   3: [
-    { q: '星盘中外圈360°的环代表什么？',
+    { q: '星盘外圈360°环代表什么？',
       opts: ['十二宫位', '地平线', '黄道带（十二星座）', '银河'],
-      ans: 2, expl: '外圈代表黄道带，即太阳在一年中"经过"的星座带。360°被平分为十二个30°的星座区域，是测量行星经度位置的"刻度尺"。' },
-    { q: '中世纪占星师偏好使用什么形式的星盘？',
+      ans: 2, expl: '外圈代表黄道带——太阳一年中"经过"的星座带。360°被平分为12个30°的星座区域。' },
+    { q: '中世纪占星师偏好什么形式的星盘？',
       opts: ['圆形星盘', '方形星盘', '三角形星盘', '无固定形式'],
-      ans: 1, expl: '中世纪占星师发明并偏好方形星盘——12个方格代表12个宫位，三角形标记表示星座。便于记录和计算。圆形星盘是后来才成为主流的。' },
+      ans: 1, expl: '中世纪占星师发明并偏好方形星盘——12格=12宫，三角形标记表示星座，极便于记录计算。' },
     { q: '星盘中的上升点（Ascendant）代表什么？',
-      opts: ['正午太阳所在位置', '西方地平线下降的星座', '东方地平线上升的星座度数', '月亮的位置'],
-      ans: 2, expl: '上升点是出生时刻东方地平线与黄道的交点——即那一刻正在升起的星座度数。这是星盘中最个人化的点，决定了整个宫位系统的起点。' },
+      opts: ['正午太阳位置', '西方下降星座', '东方地平线上升星座', '月亮位置'],
+      ans: 2, expl: '上升点是出生时刻东方地平线与黄道的交点——那一刻正在升起的星座度数。星盘中最个人化的点。' },
     { q: '传统占星师对待方盘和圆盘的态度是什么？',
-      opts: ['只用圆盘', '只用方盘', '两者兼用，各有用途', '都不喜欢，用文字记录'],
-      ans: 2, expl: '传统占星师通常两种形式都用——方形星盘便于计算和记录行星位置，圆形星盘便于展示和解读相位关系。两者互补而非互斥。' }
+      opts: ['只用圆盘', '只用方盘', '两者兼用，各有用途', '用文字记录'],
+      ans: 2, expl: '两者兼用——方形便于计算和记录行星位置，圆形便于展示和解读相位关系。互补而非互斥。' }
   ]
 };
 
@@ -1166,40 +1484,35 @@ function buildQuiz(n) {
   const container = document.getElementById('quiz' + n + 'Content');
   if (!bank || !container) return;
 
-  // If completed
-  if (state.quizData[n] && state.quizData[n].done) {
-    container.innerHTML = `<div style="text-align:center;padding:16px;">
-      <span style="color:#2d6a4f;">本讲测验已完成！得分：${state.quizData[n].score}/${bank.length}</span>
-      <br><button class="btn btn-outline" style="margin-top:10px;font-size:0.85rem;" onclick="resetQuiz(${n})">重新测验</button>
+  if (!S.quiz[n]) S.quiz[n] = { answers: {}, score: 0, done: false };
+
+  if (S.quiz[n].done) {
+    container.innerHTML = `<div style="text-align:center;padding:14px;">
+      <span style="color:#2d6a4f;">本讲测验已完成！得分：${S.quiz[n].score}/${bank.length} (${S.quiz[n].score*25} XP)</span>
+      <br><button class="btn btn-outline" style="margin-top:10px;font-size:0.84rem;" onclick="resetQuiz(${n})">重新测验</button>
     </div>`;
     return;
   }
 
-  if (!state.quizData[n]) state.quizData[n] = { answers: {}, score: 0, done: false };
-
   let html = '';
   bank.forEach((item, i) => {
-    html += `<div style="margin-bottom:22px;"><p class="quiz-q">${i+1}. ${item.q}</p><div class="quiz-opts">`;
+    const answered = S.quiz[n].answers[i] !== undefined;
+    html += `<div style="margin-bottom:20px;"><p class="quiz-q">${i+1}. ${item.q}</p><div class="quiz-opts">`;
     item.opts.forEach((opt, j) => {
-      const answered = state.quizData[n].answers[i] !== undefined;
-      const isMyAnswer = state.quizData[n].answers[i] === j;
-      const isCorrect = j === item.ans;
       let cls = '';
       if (answered) {
-        if (isMyAnswer && isCorrect) cls = 'correct';
-        else if (isMyAnswer && !isCorrect) cls = 'wrong';
-        else if (!isMyAnswer && isCorrect) cls = 'correct';
+        if (S.quiz[n].answers[i] === j && j === item.ans) cls = 'correct';
+        else if (S.quiz[n].answers[i] === j) cls = 'wrong';
+        else if (j === item.ans) cls = 'correct';
       }
-      const disabled = answered ? 'pointer-events:none;' : '';
-      html += `<div class="quiz-opt ${cls}" data-ln="${n}" data-qi="${i}" data-oi="${j}" onclick="answerQuiz(this)" style="${disabled}">${'ABCD'[j]}. ${opt}</div>`;
+      html += `<div class="quiz-opt ${cls}" data-ln="${n}" data-qi="${i}" data-oi="${j}"
+        onclick="answerQuiz(this)" style="${answered?'pointer-events:none;':''}">${'ABCD'[j]}. ${opt}</div>`;
     });
-    html += `</div><div class="quiz-fb ${state.quizData[n].answers[i] !== undefined ? (state.quizData[n].answers[i] === item.ans ? 'good show' : 'bad show') : ''}" id="fb-${n}-${i}">`;
-    if (state.quizData[n].answers[i] !== undefined) {
-      html += (state.quizData[n].answers[i] === item.ans ? '正确！' : '不正确。') + item.expl;
-    }
+    html += `</div><div class="quiz-fb ${answered ? (S.quiz[n].answers[i]===item.ans ? 'good show' : 'bad show') : ''}" id="fb-${n}-${i}">`;
+    if (answered) html += (S.quiz[n].answers[i] === item.ans ? '正确！' : '不正确。') + item.expl;
     html += '</div></div>';
   });
-  html += `<p id="quizScore${n}" style="text-align:center;color:var(--navy);font-weight:600;${state.quizData[n].done ? '' : 'display:none;'}">得分：${state.quizData[n].score}/${bank.length}</p>`;
+  html += `<p id="quizScore${n}" style="text-align:center;color:var(--navy);font-weight:700;${S.quiz[n].done?'':'display:none;'}">得分：${S.quiz[n].score}/${bank.length} (${S.quiz[n].score*25} XP)</p>`;
   container.innerHTML = html;
 }
 
@@ -1208,39 +1521,35 @@ function answerQuiz(el) {
   const qi = parseInt(el.dataset.qi);
   const oi = parseInt(el.dataset.oi);
   const bank = quizBank[n];
-  if (!bank || state.quizData[n].answers[qi] !== undefined) return;
+  if (!bank || S.quiz[n].answers[qi] !== undefined) return;
 
   const correct = oi === bank[qi].ans;
-  state.quizData[n].answers[qi] = oi;
-  if (correct) state.quizData[n].score++;
+  S.quiz[n].answers[qi] = oi;
+  if (correct) { S.quiz[n].score++; addXp(25); }
 
-  // Update UI
   el.classList.add(correct ? 'correct' : 'wrong');
   const fb = document.getElementById(`fb-${n}-${qi}`);
-  if (fb) { fb.className = 'quiz-fb ' + (correct ? 'good' : 'bad') + ' show'; fb.innerHTML = (correct ? '正确！' : '不正确。') + bank[qi].expl; }
+  if (fb) { fb.className = 'quiz-fb ' + (correct ? 'good' : 'bad') + ' show'; fb.innerHTML = (correct ? '正确！+25 XP — ' : '不正确。') + bank[qi].expl; }
 
-  // Disable & highlight
   const allOpts = document.querySelectorAll(`.quiz-opt[data-ln="${n}"][data-qi="${qi}"]`);
   allOpts.forEach(o => {
     o.style.pointerEvents = 'none';
     if (parseInt(o.dataset.oi) === bank[qi].ans && !o.classList.contains('correct')) o.classList.add('correct');
   });
 
-  // Check completion
-  if (Object.keys(state.quizData[n].answers).length >= bank.length) {
-    state.quizData[n].done = true;
+  if (Object.keys(S.quiz[n].answers).length >= bank.length) {
+    S.quiz[n].done = true;
     document.getElementById('quizScore' + n).style.display = 'block';
-    document.getElementById('quizScore' + n).textContent = '得分：' + state.quizData[n].score + '/' + bank.length;
-    if (state.quizData[n].score === bank.length) showToast('满分通过！');
+    document.getElementById('quizScore' + n).textContent = '得分：' + S.quiz[n].score + '/' + bank.length + ' (' + (S.quiz[n].score*25) + ' XP)';
+    if (S.quiz[n].score === bank.length) { addXp(30); showToast('满分通过！+30 额外XP'); }
     completeLesson(n);
+    checkAchievements();
   }
   save();
 }
 
 function resetQuiz(n) {
-  delete state.quizData[n];
-  save();
-  buildQuiz(n);
+  delete S.quiz[n]; save(); buildQuiz(n);
 }
 
 // ============================================================
@@ -1249,17 +1558,16 @@ function resetQuiz(n) {
 function init() {
   buildQuiz(1); buildQuiz(2); buildQuiz(3);
   updateProgress();
-  if (Object.keys(state.lessonsDone).length >= 3) {
+  renderAchievements();
+  document.getElementById('xpCount').textContent = S.xp;
+  if (Object.keys(S.done).length >= 3) {
     document.getElementById('nextBtn').textContent = '已完成全部课程';
     document.getElementById('nextBtn').onclick = () => goLesson(1);
   }
+  checkAchievements();
 }
 
-// Ensure voices are loaded
-if (window.speechSynthesis) {
-  window.speechSynthesis.getVoices();
-}
-
+if (window.speechSynthesis) window.speechSynthesis.getVoices();
 init();
 </script>
 
